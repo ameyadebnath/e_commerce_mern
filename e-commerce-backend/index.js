@@ -24,21 +24,38 @@ const userSchema = new mongoose.Schema({
 const User = new mongoose.model("User", userSchema);
 
 //routes
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   console.log(email);
   console.log(password);
-  User.findOne({ email: email }).then((err, user) => {
+  // User.findOne({ email: email }).then((err, user) => {
+  //   if (user) {
+  //     if (password == user.password) {
+  //       res.send({ message: "Login Successfull", user: user });
+  //     } else {
+  //       res.send({ message: "Password didn't match" });
+  //     }
+  //   } else {
+  //     res.send({ message: "User not Registered" });
+  //   }
+  // });
+  try {
+    const user = await User.findOne({email:email});
     if (user) {
+      console.log("user found: "+user.email+" "+user.password+" "+user)
       if (password == user.password) {
-        res.send({ message: "Login Successfull", user: user });
+        res.send({ message: "Login Successful", user: user });
       } else {
         res.send({ message: "Password didn't match" });
       }
     } else {
       res.send({ message: "User not Registered" });
     }
-  });
+  } catch (error) {
+    console.log(error);
+    res.send({ message: "An error occurred" });
+  }
+  
 });
 
 app.post("/register", (req, res) => {
