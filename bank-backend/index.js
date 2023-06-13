@@ -17,15 +17,15 @@ mongoose
   });
 
 const userSchema = new mongoose.Schema({
-  email: String,
-  password: String,
-  bankid: {
-    type: String,
-    default: "",
-  },
+  accountno: String,
+  secretkey: String,
+  balance: {
+    type: Number,
+    default: 1000000
+  }
 });
 
-const User = new mongoose.model("User", userSchema);
+const User = new mongoose.model("bankuser", userSchema);
 
 //routes
 app.post("/login", async (req, res) => {
@@ -62,43 +62,23 @@ app.post("/login", async (req, res) => {
   
 });
 
-app.post("/register", (req, res) => {
-  const { email, password } = req.body;
-  console.log(email);
-  console.log(password);
-  User.findOne({ email: email })
-    .then((err, user) => {
-      if (user) {
-        res.send({ message: "User already registerd" });
-      } else {
-        const user = new User({
-          email: email,
-          password: password,
-        });
-        user
-          .save()
-          .then((doc) => {
-            res.send({ message: "Successfully Registered, Please login now." });
-          })
-          .catch((e) => console.log(e));
-      }
-    })
-    .catch((e) => console.log(e));
-});
+app.post("/addbankinfo", async (req, res) => {
+  const { accountno, secretkey } = req.body;
+  console.log("Account no and secret key: " + accountno + " " + secretkey);
 
-app.post("/updatebankinfo", async (req, res) => {
-  const { email, bankid } = req.body;
-  console.log("Email and bankId: "+email+" "+bankid);
   try {
-    const user = await User.findOneAndUpdate(
-      { email: email },
-      { bankid: bankid },
-      { new: true, upsert: true }
-    );
+    var user = await User.findOne({ accountno: accountno });
     if (user) {
-      res.send({ message: "User info updated with bank info", success:1});
+      res.send({ message: "User already registered", success:0 });
     } else {
-      res.send({ message: "No user found",success:0 });
+      const newUser = new User({
+        accountno: accountno,
+        secretkey: secretkey,
+        balance: 1000000,
+      });
+      await newUser.save();
+      user = await User.findOne({ accountno: accountno });
+      res.send({ message: "Successfully Registered, Please login now.", success: 1, user:user });
     }
   } catch (error) {
     console.log(error);
@@ -106,8 +86,9 @@ app.post("/updatebankinfo", async (req, res) => {
   }
 });
 
-app.listen(9002, () => {
-  console.log("BE started at poet 9002");
+
+app.listen(9003, () => {
+  console.log("Bank server started at poet 9003");
 });
 
 //46.16minutes

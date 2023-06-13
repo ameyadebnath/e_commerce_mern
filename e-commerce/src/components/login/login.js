@@ -22,8 +22,29 @@ const Login = () => {
   const login = () => {
     axios
       .post("http://localhost:9002/login", user)
-      .then((res) => alert(res.data.message));
+      .then((res) => {
+        alert(res.data.message);
+        console.log(res.data);
+      });
   };
+
+  // const login = () => {
+  //   var bankid = ""
+  //   axios
+  //     .post("http://localhost:9003/addbankinfo", { accountno: "1234567890", secretkey: "mysecretpassword"})
+  //     .then((res) => {
+  //       alert(res.data.message);
+  //       console.log(res.data);
+  //       if(res.data.user._id!==undefined){
+  //         axios
+  //         .post("http://localhost:9002/updatebankinfo", { email: user.email, bankid: res.data.user._id})
+  //         .then((res) => {
+  //           alert(res.data.message);
+  //           console.log(res.data);
+  //         });
+  //       }
+  //     });
+  // };
 
   return (
     <div className="login">
@@ -52,5 +73,7 @@ const Login = () => {
     </div>
   );
 };
+
+
 
 export default Login;
