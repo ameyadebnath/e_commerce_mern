@@ -46,6 +46,7 @@ const Login = () => {
 
   return (
     <div className="login">
+      <div className="background-image"></div>
       <h1>Login</h1>
       <input
         type="text"
