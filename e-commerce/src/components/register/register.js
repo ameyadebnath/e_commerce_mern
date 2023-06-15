@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     email: "",
@@ -61,9 +61,9 @@ const Register = () => {
         Register
       </div>
       <div>or</div>
-      {/* <div className="button" onClick={() => navigate.push("/login")}>
+      <div className="button" onClick={() => navigate("/login")}>
         Login
-      </div> */}
+      </div>
     </div>
   );
 };

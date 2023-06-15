@@ -20,12 +20,10 @@ const Login = () => {
   };
 
   const login = () => {
-    axios
-      .post("http://localhost:9002/login", user)
-      .then((res) => {
-        alert(res.data.message);
-        console.log(res.data);
-      });
+    axios.post("http://localhost:9002/login", user).then((res) => {
+      alert(res.data.message);
+      console.log(res.data);
+    });
   };
 
   // const login = () => {
@@ -67,13 +65,11 @@ const Login = () => {
         Login
       </div>
       <div>or</div>
-      {/* <div className="button" onClick={(e) => navigate("/register")}>
+      <div className="button" onClick={(e) => navigate("/register")}>
         Register
-      </div> */}
+      </div>
     </div>
   );
 };
-
-
 
 export default Login;

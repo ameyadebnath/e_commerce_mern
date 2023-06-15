@@ -1,7 +1,8 @@
 {
   "dependencies": {
+    "@material-ui/icons": "^4.11.3",
     "axios": "^1.4.0",
     "react-hook-form": "^7.44.3",
-    "react-router-dom": "^6.12.1"
+    "react-router-dom": "^6.13.0"
   }
 }

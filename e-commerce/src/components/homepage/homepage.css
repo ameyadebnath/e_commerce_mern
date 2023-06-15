@@ -1,24 +1,39 @@
-.homepage{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50vw;
-    height: 50vh;
-    border-radius: 20px;
-    box-shadow: 0 0 15px 5px gray;
-    background: white;
-    position: relative;
+.header {
+  position: relative;
+  top: 0;
+  min-height: 80px;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  overflow: hidden;
+  background-color: black;
 }
 
-.homepage > .button{
-    background: #1877f2;
-    border: 1px solid #1877f2;
-    color: #fff;
-    font-size: 1.25rem;
-    padding: 0.5 rem;
-    margin: 0.5rem 0;
-    border-radius: 8px;
-    outline: none;
-    cursor: pointer;
+.logo {
+  text-decoration: none;
+
+  color: whitesmoke;
+  padding-left: 40px;
+}
+
+.header-links {
+  display: flex;
+  padding-left: 70%;
+}
+
+.header-links ul li {
+  list-style: none;
+  display: inline-block;
+  font-size: 20px;
+  padding-right: 15%;
+  padding-top: 10px;
+}
+
+.header-links ul li a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+  padding: 0px, 15px;
 }
