@@ -1,40 +1,10 @@
-import React, { useState } from "react";
-import "./register.css";
-import axios from "axios";
+import React from "react";
+import Admin_page from "../admin_page/Admin_page";
 import { useNavigate } from "react-router-dom";
-
-const Register = () => {
+const Admin = () => {
   const navigate = useNavigate();
-
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-    reEnterPassword: "",
-  });
-
-  const handleChnage = (e) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value,
-    });
-  };
-
-  const register = () => {
-    const { email, password, reEnterPassword } = user;
-
-    if (email && password && password === reEnterPassword) {
-      //alert("posted")
-      axios
-        .post("http://localhost:9002/register", user)
-        .then((res) => alert(res.data.message));
-    } else {
-      alert("invalid input");
-    }
-  };
-
   return (
-    <>
+    <div>
       <div className="all-nav">
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <a class="navbar-brand" href="/login">
@@ -73,41 +43,33 @@ const Register = () => {
         </nav>
       </div>
 
-      <div className="rcapsule">
-        <div className="register">
-          <h1>Register</h1>
+      <div className="lcapsule">
+        <div className="login">
+          <h1 className="header1">Login as Admin</h1>
+
           <input
             type="text"
             name="email"
-            value={user.email}
+            // value={user.email}
+            // onChange={handleChnage}
             placeholder="Enter Your Email"
-            onChange={handleChnage}
           ></input>
           <input
+            className="input2"
             type="password"
             name="password"
-            value={user.password}
+            // value={user.password}
+            // onChange={handleChnage}
             placeholder="Enter Your Password"
-            onChange={handleChnage}
           ></input>
-          <input
-            type="password"
-            name="reEnterPassword"
-            value={user.reEnterPassword}
-            placeholder="Confirm Password"
-            onChange={handleChnage}
-          ></input>
-          <div className="button" onClick={register}>
-            Register
-          </div>
-          <div>or</div>
-          <div className="button" onClick={() => navigate("/login")}>
+          <div className="space"></div>
+          <div className="button" onClick={() => navigate("/Admin_page")}>
             Login
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Register;
+export default Admin;
