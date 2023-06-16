@@ -22,6 +22,7 @@ function App() {
     } else {
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
     }
+    console.log(cartItems);
   };
 
   const handleRemoveProduct = (product) => {
@@ -60,7 +61,7 @@ function App() {
             />
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login mUser={user} setMUser={setUser} handleCartClearance={handleCartClearance}/>} />
         <Route path="/register" element={<Register />} />
         <Route
           path="/cart"

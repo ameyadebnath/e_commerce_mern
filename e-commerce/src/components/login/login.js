@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
-const Login = () => {
+const Login = ({mUser,setMUser,handleCartClearance}) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -21,8 +22,20 @@ const Login = () => {
 
   const login = () => {
     axios.post("http://localhost:9002/login", user).then((res) => {
-      alert(res.data.message);
       console.log(res.data);
+      handleCartClearance();
+      if(res.data.user===undefined) {
+        toast.warning(res.data.message);
+        return;
+      }
+      toast.success(res.data.message);
+      console.log(typeof setMUser)
+      setMUser(res.data.user);
+      if(res.data.user.bankid.length!==0){
+        navigate('/');
+      }else{
+        //navigate to bank info providing page
+      }
     });
   };
 
