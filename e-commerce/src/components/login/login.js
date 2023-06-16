@@ -58,33 +58,73 @@ const Login = ({mUser,setMUser,handleCartClearance}) => {
   // };
 
   return (
-    <div className="lcapsule">
-      <div className="login">
-        <div className="background-image"></div>
-        <h1>Login</h1>
-        <input
-          type="text"
-          name="email"
-          value={user.email}
-          onChange={handleChnage}
-          placeholder="Enter Your Email"
-        ></input>
-        <input
-          type="password"
-          name="password"
-          value={user.password}
-          onChange={handleChnage}
-          placeholder="Enter Your Password"
-        ></input>
-        <div className="button" onClick={login}>
-          Login
-        </div>
-        <div>or</div>
-        <div className="button" onClick={(e) => navigate("/register")}>
-          Register
+    <>
+      <div className="all-nav">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="/login">
+            iGadget
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarText"
+            aria-controls="navbarText"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarText">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <a className="nav-link" href="/login">
+                  Login as User
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/login_supplier">
+                  Supplier
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/admin">
+                  Admin
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div className="lcapsule">
+        <div className="login">
+          <div className="background-image"></div>
+          <h1 className="header1">Login</h1>
+          <input
+            type="text"
+            name="email"
+            value={user.email}
+            onChange={handleChnage}
+            placeholder="Enter Your Email"
+          ></input>
+          <input
+            type="password"
+            name="password"
+            value={user.password}
+            onChange={handleChnage}
+            placeholder="Enter Your Password"
+          ></input>
+          <div className="button" onClick={login}>
+            Login
+          </div>
+          <div>or</div>
+          <div className="button" onClick={(e) => navigate("/register")}>
+            Register
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

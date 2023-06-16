@@ -1,6 +1,7 @@
 .login {
   padding-top: 10%;
-  width: 40%;
+  width: 50%;
+  height: 470px;
 
   background: #fff;
   border: 1px solid #dddfe2;
@@ -10,18 +11,16 @@
   align-items: center;
   text-align: center;
 }
-
-.background-image {
-  width: 50%;
-  background-image: url("./ipad_pro.jpg");
-  background-size: cover;
+.header1 {
+  padding: 10% 0 7% 0;
 }
+
 .login > input {
   border-radius: 8px;
   border: 2px solid #dddfe2;
   outline: none;
   color: #1d2129;
-  margin: 0.5rem 0;
+  margin: 0.79rem 0;
   padding: 0.5rem 0.75rem;
   width: 92%;
   font-size: 1rem;
@@ -38,8 +37,15 @@
   outline: none;
   cursor: pointer;
 }
+.space {
+  margin: 10%;
+}
 
-.lcapsule{
+.lcapsule {
   margin-top: 5%;
   margin-left: 35%;
+}
+.all-nav {
+  margin-right: 15px;
+  margin-left: 15px;
 }

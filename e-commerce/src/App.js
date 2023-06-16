@@ -3,8 +3,13 @@ import React, { useState } from "react";
 import Homepage from "./components/homepage/homepage";
 import Cart from "./components/homepage/Cart";
 import Login from "./components/login/login";
+import Login_supplier from "./components/login/login_supplier";
 import Register from "./components/register/register";
+import Admin from "./components/login/admin";
+import Admin_page from "./components/admin_page/Admin_page";
+import Bank from "./components/login/bank";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Supplier from "./components/supplier/Supplier";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -61,8 +66,23 @@ function App() {
             />
           }
         />
-        <Route path="/login" element={<Login mUser={user} setMUser={setUser} handleCartClearance={handleCartClearance}/>} />
+
+        <Route path="/login_supplier" element={<Login_supplier />} />
+        <Route
+          path="/login"
+          element={
+            <Login
+              mUser={user}
+              setMUser={setUser}
+              handleCartClearance={handleCartClearance}
+            />
+          }
+        />
         <Route path="/register" element={<Register />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin_page" element={<Admin_page />} />
+        <Route path="/Supplier" element={<Supplier />} />
+        <Route path="/bank" element={<Bank />} />
         <Route
           path="/cart"
           element={
