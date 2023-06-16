@@ -27,6 +27,7 @@ function App() {
     } else {
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
     }
+    console.log(cartItems);
   };
 
   const handleRemoveProduct = (product) => {
@@ -65,8 +66,18 @@ function App() {
             />
           }
         />
-        <Route path="/login" element={<Login />} />
+
         <Route path="/login_supplier" element={<Login_supplier />} />
+        <Route
+          path="/login"
+          element={
+            <Login
+              mUser={user}
+              setMUser={setUser}
+              handleCartClearance={handleCartClearance}
+            />
+          }
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin_page" element={<Admin_page />} />

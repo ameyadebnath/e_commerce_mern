@@ -69,7 +69,7 @@ app.post("/addbankinfo", async (req, res) => {
   try {
     var user = await User.findOne({ accountno: accountno });
     if (user) {
-      res.send({ message: "User already registered", success:0 });
+      res.send({ message: "User already registered", success:0, user:user });
     } else {
       const newUser = new User({
         accountno: accountno,
@@ -85,6 +85,59 @@ app.post("/addbankinfo", async (req, res) => {
     res.send({ message: "An error occurred", success:0 });
   }
 });
+
+//transferring money from one account to another account
+app.post("/transfer", async (req, res) => {
+  const { fromBankId, toBankId, amount } = req.body;
+
+  try {
+    const fromBankUser = await User.findById(fromBankId);
+    const toBankUser = await User.findById(toBankId);
+
+    if (!fromBankUser || !toBankUser) {
+      res.send({ success: 0, message: "Invalid bank account" });
+      return;
+    }
+
+    if (fromBankUser.balance < amount) {
+      res.send({ success: 0, message: "Insufficient balance" });
+      return;
+    }
+
+    // Deduct money from the 'from' bank account
+    fromBankUser.balance -= amount;
+    await fromBankUser.save();
+
+    // Add money to the 'to' bank account
+    toBankUser.balance += amount;
+    await toBankUser.save();
+
+    res.send({ success: 1, message: "Money transferred successfully" });
+  } catch (error) {
+    console.log(error);
+    res.send({ success: 0, message: "An error occurred" });
+  }
+});
+
+//get accunt balance
+app.post('/getUserAmount', async (req, res) => {
+  const { bankId } = req.body;
+
+  try {
+    const user = await User.findById(bankId);
+    if (!user) {
+      return res.send({ message: 'User not found', success:0 });
+    }
+
+    const amount = user.balance;
+    return res.send({ amount: amount, success:1 });
+  } catch (error) {
+    console.log(error);
+    return res.send({ message: 'An error occurred',success:0 });
+  }
+});
+
+
 
 
 app.listen(9003, () => {

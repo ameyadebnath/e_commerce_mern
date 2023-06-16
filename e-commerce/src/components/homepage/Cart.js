@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Cart.css";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Cart = ({
   user,
@@ -11,10 +13,54 @@ const Cart = ({
   handleRemoveProduct,
   handleCartClearance,
 }) => {
+
+  const [balance, setBalance] = useState('');
+
+  useEffect(() => {
+    // Function to fetch the user's account balance
+    const fetchAccountBalance = async () => {
+      try {
+        const response = await axios.post('http://localhost:9003/getUserAmount', {
+          bankId: user.bankid, // Replace with the actual user bank ID
+        });
+        const { amount, success } = response.data;
+        if (success) {
+          setBalance(amount);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchAccountBalance(); // Call the function when the component mounts
+
+    // Cleanup function
+    return () => {
+      // Any cleanup logic if needed
+    };
+  }, []);
+
   const totalPrice = cartItems.reduce(
     (price, item) => price + item.quantity * item.price,
     0
   );
+
+  var makeOrderRequest = () => {
+    console.log(cartItems)
+    console.log(user._id)
+    axios.post('http://localhost:9002/placeOrder', {orders: cartItems, userId: user._id})
+    .then(response => {
+      console.log(response.data);
+      if(response.data.success===1) toast.success(response.data.message);
+      else toast.warning(response.data.message);
+      // Process the response data
+    })
+    .catch(error => {
+      console.log(error);
+      // Handle any errors
+    });
+  }
+
   return (
     <div>
       <header className="header">
@@ -49,7 +95,7 @@ const Cart = ({
       </header>
 
       {/* balance */}
-      <div className="account-balance">Current Balance</div>
+      <div className="account-balance">Current Balance: ${balance}</div>
 
       <div className="cart-items">
         <h2 className="cart-items-header">Cart Items</h2>
@@ -101,7 +147,7 @@ const Cart = ({
         </div>
       </div>
       <div className="container d-flex justify-content-center align-items-center">
-        <button className="submit"> Auto-Pay </button>
+        <button className="submit" onClick={makeOrderRequest}> Auto-Pay </button>
       </div>
     </div>
   );
