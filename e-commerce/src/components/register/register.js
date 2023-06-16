@@ -34,35 +34,37 @@ const Register = () => {
   };
 
   return (
-    <div className="register">
-      <h1>Register</h1>
-      <input
-        type="text"
-        name="email"
-        value={user.email}
-        placeholder="Enter Your Email"
-        onChange={handleChnage}
-      ></input>
-      <input
-        type="password"
-        name="password"
-        value={user.password}
-        placeholder="Enter Your Password"
-        onChange={handleChnage}
-      ></input>
-      <input
-        type="password"
-        name="reEnterPassword"
-        value={user.reEnterPassword}
-        placeholder="Confirm Password"
-        onChange={handleChnage}
-      ></input>
-      <div className="button" onClick={register}>
-        Register
-      </div>
-      <div>or</div>
-      <div className="button" onClick={() => navigate("/login")}>
-        Login
+    <div className="rcapsule">
+      <div className="register">
+        <h1>Register</h1>
+        <input
+          type="text"
+          name="email"
+          value={user.email}
+          placeholder="Enter Your Email"
+          onChange={handleChnage}
+        ></input>
+        <input
+          type="password"
+          name="password"
+          value={user.password}
+          placeholder="Enter Your Password"
+          onChange={handleChnage}
+        ></input>
+        <input
+          type="password"
+          name="reEnterPassword"
+          value={user.reEnterPassword}
+          placeholder="Confirm Password"
+          onChange={handleChnage}
+        ></input>
+        <div className="button" onClick={register}>
+          Register
+        </div>
+        <div>or</div>
+        <div className="button" onClick={() => navigate("/login")}>
+          Login
+        </div>
       </div>
     </div>
   );
