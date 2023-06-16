@@ -8,8 +8,10 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { BrowserRouter as Router } from "react-router-dom";
 import Cart from "./Cart";
 
-const Homepage = () => {
-  const [cartItems, setCartItems] = useState([]);
+const Homepage = ({ user, setUser, cartItems, setCartItems }) => {
+  //const [cartItems, setCartItems] = useState([]);
+  // var cartItems = props.cartItems
+  // var setCartItems = props.setCartItems
   return (
     <div>
       <header className="header">
@@ -44,7 +46,7 @@ const Homepage = () => {
         </div>
       </header>
       <div>
-        <Products />
+        <Products user={user} setUser={setUser} cartItems={cartItems} setCartItems={setCartItems} />
       </div>
     </div>
   );

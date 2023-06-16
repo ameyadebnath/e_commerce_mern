@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Cart = ({ cartItems }) => {
+const Cart = ({ user, setUser, cartItems, setCartItems }) => {
+
   return (
     <div>
       <header className="header">

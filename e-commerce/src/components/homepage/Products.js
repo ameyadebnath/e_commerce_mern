@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Products.css";
 
-const Products = () => {
+const Products = ({ user, setUser, cartItems, setCartItems }) => {
   const productItems = [
     {
       id: 1,
