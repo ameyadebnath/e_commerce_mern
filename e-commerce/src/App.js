@@ -82,7 +82,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin_page" element={<Admin_page />} />
         <Route path="/Supplier" element={<Supplier />} />
-        <Route path="/bank" element={<Bank />} />
+        <Route path="/bank" element={<Bank user={user}/>} />
         <Route
           path="/cart"
           element={
