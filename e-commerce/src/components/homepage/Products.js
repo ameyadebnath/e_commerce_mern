@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import "./Products.css";
 
-const Products = ({ user, setUser, cartItems, setCartItems }) => {
+const Products = ({
+  user,
+  setUser,
+  cartItems,
+  setCartItems,
+  handleAddProduct,
+}) => {
   const productItems = [
     {
       id: 1,
@@ -68,7 +74,12 @@ const Products = ({ user, setUser, cartItems, setCartItems }) => {
           <div className="product-price">${productItem.price}</div>
 
           <div>
-            <button className="product-add-button">Add to Cart</button>
+            <button
+              className="product-add-button"
+              onClick={() => handleAddProduct(productItem)}
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
       ))}

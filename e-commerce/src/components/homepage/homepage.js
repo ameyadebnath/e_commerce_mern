@@ -8,10 +8,18 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { BrowserRouter as Router } from "react-router-dom";
 import Cart from "./Cart";
 
-const Homepage = ({ user, setUser, cartItems, setCartItems }) => {
+const Homepage = ({
+  user,
+  setUser,
+  cartItems,
+  setCartItems,
+  handleAddProduct,
+  handleRemoveProduct,
+}) => {
   //const [cartItems, setCartItems] = useState([]);
   // var cartItems = props.cartItems
   // var setCartItems = props.setCartItems
+
   return (
     <div>
       <header className="header">
@@ -32,7 +40,6 @@ const Homepage = ({ user, setUser, cartItems, setCartItems }) => {
           <ul>
             <li>
               <Link to="/cart" className="cart">
-                <Cart cartItems={cartItems} />
                 <i class="fas fa-shopping-cart" />
               </Link>
             </li>
@@ -40,13 +47,20 @@ const Homepage = ({ user, setUser, cartItems, setCartItems }) => {
 
           <ul>
             <li>
-              <Link to="/">logout</Link>
+              <Link to="/login">logout</Link>
             </li>
           </ul>
         </div>
       </header>
       <div>
-        <Products user={user} setUser={setUser} cartItems={cartItems} setCartItems={setCartItems} />
+        <Products
+          user={user}
+          setUser={setUser}
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+          handleAddProduct={handleAddProduct}
+          handleRemoveProduct={handleRemoveProduct}
+        />
       </div>
     </div>
   );
