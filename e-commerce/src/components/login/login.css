@@ -1,6 +1,6 @@
 .login {
   padding-top: 10%;
-  width: 400px;
+  width: 40%;
 
   background: #fff;
   border: 1px solid #dddfe2;
@@ -37,4 +37,9 @@
   border-radius: 8px;
   outline: none;
   cursor: pointer;
+}
+
+.lcapsule{
+  margin-top: 5%;
+  margin-left: 35%;
 }

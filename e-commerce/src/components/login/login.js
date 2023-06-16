@@ -45,29 +45,31 @@ const Login = () => {
   // };
 
   return (
-    <div className="login">
-      <div className="background-image"></div>
-      <h1>Login</h1>
-      <input
-        type="text"
-        name="email"
-        value={user.email}
-        onChange={handleChnage}
-        placeholder="Enter Your Email"
-      ></input>
-      <input
-        type="password"
-        name="password"
-        value={user.password}
-        onChange={handleChnage}
-        placeholder="Enter Your Password"
-      ></input>
-      <div className="button" onClick={login}>
-        Login
-      </div>
-      <div>or</div>
-      <div className="button" onClick={(e) => navigate("/register")}>
-        Register
+    <div className="lcapsule">
+      <div className="login">
+        <div className="background-image"></div>
+        <h1>Login</h1>
+        <input
+          type="text"
+          name="email"
+          value={user.email}
+          onChange={handleChnage}
+          placeholder="Enter Your Email"
+        ></input>
+        <input
+          type="password"
+          name="password"
+          value={user.password}
+          onChange={handleChnage}
+          placeholder="Enter Your Password"
+        ></input>
+        <div className="button" onClick={login}>
+          Login
+        </div>
+        <div>or</div>
+        <div className="button" onClick={(e) => navigate("/register")}>
+          Register
+        </div>
       </div>
     </div>
   );
