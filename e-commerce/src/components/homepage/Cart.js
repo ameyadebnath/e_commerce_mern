@@ -9,6 +9,7 @@ const Cart = ({
   setCartItems,
   handleAddProduct,
   handleRemoveProduct,
+  handleCartClearance,
 }) => {
   const totalPrice = cartItems.reduce(
     (price, item) => price + item.quantity * item.price,
@@ -51,7 +52,14 @@ const Cart = ({
       <div className="account-balance">Current Balance</div>
 
       <div className="cart-items">
-        <div className="cart-items-header">Cart Items</div>
+        <h2 className="cart-items-header">Cart Items</h2>
+        <div className="clear-cart">
+          {cartItems.length >= 1 && (
+            <button className="clear-cart-button" onClick={handleCartClearance}>
+              Clear Cart
+            </button>
+          )}
+        </div>
 
         {cartItems.length === 0 && (
           <div className="cart-items-empty">No items are added.</div>

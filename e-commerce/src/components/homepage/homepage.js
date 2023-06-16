@@ -15,6 +15,7 @@ const Homepage = ({
   setCartItems,
   handleAddProduct,
   handleRemoveProduct,
+  handleCartClearance,
 }) => {
   //const [cartItems, setCartItems] = useState([]);
   // var cartItems = props.cartItems
@@ -60,6 +61,7 @@ const Homepage = ({
           setCartItems={setCartItems}
           handleAddProduct={handleAddProduct}
           handleRemoveProduct={handleRemoveProduct}
+          handleCartClearance={handleCartClearance}
         />
       </div>
     </div>
