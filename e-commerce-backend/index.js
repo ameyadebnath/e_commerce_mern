@@ -35,6 +35,10 @@ const pendingOrderSchema = new mongoose.Schema({
   totalPrice: Number,
   userId: String,
   bankId: String,
+  date: {
+    type: String,
+    default: new Date().toLocaleDateString()
+  },
   orderedItems: [
     {
       id: Number,
@@ -174,6 +178,72 @@ app.post("/placeOrder", async (req, res) => {
   }
 });
 
+app.post('/getPendingOrders', async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const pendingOrders = await PendingOrder.find({ userId: userId });
+    res.send({ pendingOrders: pendingOrders, success: 1 });
+  } catch (error) {
+    console.log(error);
+    res.send({ message: 'An error occurred', success: 0 });
+  }
+});
+
+app.get('/pendingOrders', async (req, res) => {
+  try {
+    const pendingOrders = await PendingOrder.find();
+    res.send({ pendingOrders: pendingOrders, success: 1 });
+  } catch (error) {
+    console.log(error);
+    res.send({ message: 'An error occurred', success: 0 });
+  }
+});
+
+app.get("/bankid", (req, res) => {
+  res.json({ bankId: bankid });
+});
+
+app.post("/deletePendingOrder", async (req, res) => {
+  const { orderId } = req.body;
+
+  try {
+    // Retrieve the supplier's bank ID
+    const supplierBankIdResponse = await axios.get("http://localhost:9004/bankid");
+    const supplierBankId = supplierBankIdResponse.data.bankId;
+
+    // Retrieve the pending order
+    var deletedOrder = await PendingOrder.findById(orderId);
+    if (!deletedOrder) {
+      return res.send({ message: "Order not found", success: 0 });
+    }
+
+    // Transfer the money from e-commerce bank to supplier bank
+    const transferData = {
+      fromBankId: bankid, // E-commerce bank ID
+      toBankId: supplierBankId, // Supplier bank ID
+      amount: deletedOrder.totalPrice,
+    };
+
+    const transferResponse = await axios.post("http://localhost:9003/transfer", transferData);
+    if (transferResponse.data.success !== 1) {
+      return res.send({ message: transferResponse.data.message, success: 0 });
+    }
+
+    // Delete the pending order
+    deletedOrder = await PendingOrder.findByIdAndDelete(orderId);
+    if (!deletedOrder) {
+      return res.send({ message: "Order not found", success: 0 });
+    }
+
+    return res.send({ message: "Order deleted successfully", success: 1, deletedOrder: deletedOrder });
+  } catch (error) {
+    console.log(error);
+    return res.send({ message: "An error occurred", success: 0 });
+  }
+});
+
+
 app.listen(9002, () => {
   console.log("BE started at poet 9002");
 });
@@ -187,3 +257,4 @@ app.listen(9002, () => {
         bankid=res.data.user._id;
         console.log("received bank id of ecommerce "+bankid)
       });
+

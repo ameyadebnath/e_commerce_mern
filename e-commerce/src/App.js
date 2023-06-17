@@ -82,8 +82,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin_page" element={<Admin_page />} />
+
+        <Route path="/bank" element={<Bank user={user} />} />
         <Route path="/supplier" element={<Supplier />} />
-        <Route path="/bank" element={<Bank />} />
         <Route path="/current_order" element={<Current_order />} />
         <Route
           path="/cart"

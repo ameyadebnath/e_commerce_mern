@@ -35,6 +35,7 @@ const Login = ({mUser,setMUser,handleCartClearance}) => {
         navigate('/');
       }else{
         //navigate to bank info providing page
+        navigate('/bank');
       }
     });
   };
