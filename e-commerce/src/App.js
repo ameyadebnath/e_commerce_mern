@@ -10,6 +10,7 @@ import Admin_page from "./components/admin_page/Admin_page";
 import Bank from "./components/login/bank";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Supplier from "./components/supplier/Supplier";
+import Current_order from "./components/homepage/Current_order";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -81,8 +82,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin_page" element={<Admin_page />} />
-        <Route path="/Supplier" element={<Supplier />} />
+        <Route path="/supplier" element={<Supplier />} />
         <Route path="/bank" element={<Bank />} />
+        <Route path="/current_order" element={<Current_order />} />
         <Route
           path="/cart"
           element={

@@ -13,16 +13,29 @@ const Cart = ({
   handleRemoveProduct,
   handleCartClearance,
 }) => {
+<<<<<<< Updated upstream
+  const [balance, setBalance] = useState("");
+=======
 
   const [balance, setBalance] = useState('');
+>>>>>>> Stashed changes
 
   useEffect(() => {
     // Function to fetch the user's account balance
     const fetchAccountBalance = async () => {
       try {
+<<<<<<< Updated upstream
+        const response = await axios.post(
+          "http://localhost:9003/getUserAmount",
+          {
+            bankId: user.bankid, // Replace with the actual user bank ID
+          }
+        );
+=======
         const response = await axios.post('http://localhost:9003/getUserAmount', {
           bankId: user.bankid, // Replace with the actual user bank ID
         });
+>>>>>>> Stashed changes
         const { amount, success } = response.data;
         if (success) {
           setBalance(amount);
@@ -46,6 +59,26 @@ const Cart = ({
   );
 
   var makeOrderRequest = () => {
+<<<<<<< Updated upstream
+    console.log(cartItems);
+    console.log(user._id);
+    axios
+      .post("http://localhost:9002/placeOrder", {
+        orders: cartItems,
+        userId: user._id,
+      })
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.success === 1) toast.success(response.data.message);
+        else toast.warning(response.data.message);
+        // Process the response data
+      })
+      .catch((error) => {
+        console.log(error);
+        // Handle any errors
+      });
+  };
+=======
     console.log(cartItems)
     console.log(user._id)
     axios.post('http://localhost:9002/placeOrder', {orders: cartItems, userId: user._id})
@@ -60,6 +93,7 @@ const Cart = ({
       // Handle any errors
     });
   }
+>>>>>>> Stashed changes
 
   return (
     <div>
@@ -83,6 +117,12 @@ const Cart = ({
               <Link to="/cart" className="cart">
                 <i class="fas fa-shopping-cart" />
               </Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <Link to="/current_order">Current_order</Link>
             </li>
           </ul>
 
@@ -147,7 +187,14 @@ const Cart = ({
         </div>
       </div>
       <div className="container d-flex justify-content-center align-items-center">
+<<<<<<< Updated upstream
+        <button className="submit" onClick={makeOrderRequest}>
+          {" "}
+          Auto-Pay{" "}
+        </button>
+=======
         <button className="submit" onClick={makeOrderRequest}> Auto-Pay </button>
+>>>>>>> Stashed changes
       </div>
     </div>
   );

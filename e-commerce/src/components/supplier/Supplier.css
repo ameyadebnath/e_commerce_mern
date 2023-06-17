@@ -1,0 +1,49 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  width: 90%;
+
+  border-bottom: 2px solid black;
+}
+.status1 {
+  border: none;
+  border-radius: 5px;
+  background-color: brown;
+  height: 30px;
+  width: 100px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+
+.status1:hover {
+  background-color: green;
+}
+.pending-cart-items {
+  margin: 30px auto;
+  width: 50%;
+  background-color: orange;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding-bottom: 10px;
+}
+.pending-cart-items-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 30px;
+  border-bottom: 2px solid black;
+  padding: 6% 0% 6% 0%;
+}
+.account-balance1 {
+  margin: 55px auto;
+  width: 40%;
+  background-color: lightgrey;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 22px;
+  padding-left: 1%;
+}

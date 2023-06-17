@@ -103,7 +103,7 @@
 .clear-cart-button {
   border: none;
   border-radius: 5px;
-  background-color: red;
+  background-color: green;
   height: 30px;
   width: 100px;
   font-size: 18px;
@@ -111,7 +111,7 @@
   cursor: pointer;
 }
 .clear-cart-button:hover {
-  background-color: green;
+  background-color: red;
 }
 .clear-cart {
   display: flex;

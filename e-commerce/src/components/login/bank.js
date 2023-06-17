@@ -32,6 +32,12 @@ const Bank = () => {
 
           <ul>
             <li>
+              <Link to="/current_order">Current_order</Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
               <Link to="/login">logout</Link>
             </li>
           </ul>
