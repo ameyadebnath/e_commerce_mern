@@ -14,9 +14,8 @@ const Current_order = ({
   handleRemoveProduct,
   handleCartClearance,
 }) => {
-
   const [balance, setBalance] = useState("");
-  const [PendingOrders, setPendingOrders] = useState([])
+  const [PendingOrders, setPendingOrders] = useState([{ orderedItems: [] }]);
 
   useEffect(() => {
     // Function to fetch the user's account balance
@@ -31,8 +30,8 @@ const Current_order = ({
         const { amount, success } = response.data;
         if (success) {
           setBalance(amount);
-        }else{
-          toast.warning(response.data.message)
+        } else {
+          toast.warning(response.data.message);
         }
       } catch (error) {
         console.log(error);
@@ -49,12 +48,12 @@ const Current_order = ({
           }
         );
         const { success } = response.data;
-        setPendingOrders(response.data.pendingOrders)
-        console.log(response.data.pendingOrders)
+        setPendingOrders(response.data.pendingOrders);
+        console.log(response.data.pendingOrders);
         if (success) {
           //setBalance(amount);
-        }else{
-          toast.warning(response.data.message)
+        } else {
+          toast.warning(response.data.message);
         }
       } catch (error) {
         console.log(error);
@@ -122,7 +121,7 @@ const Current_order = ({
 
         <div>
           will add here all products to show
-          {PendingOrders[0].orderedItems.map((item) => (
+          {PendingOrders[2].orderedItems.map((item) => (
             <div key={item.id} className="cart-items-list">
               <img
                 className="cart-items-image"
