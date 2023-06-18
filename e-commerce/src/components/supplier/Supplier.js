@@ -90,6 +90,86 @@ const Supplier = ({
     };
   }, []);
 
+  // Function to fetch the user's account balance
+  const fetchAccountBalance = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:9003/getUserAmount",
+        {
+          bankId: user.bankid, // Replace with the actual user bank ID
+        }
+      );
+      const { amount, success } = response.data;
+      if (success) {
+        setBalance(amount);
+      } else {
+        toast.warning(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.warning("something went wrong");
+    }
+  };
+
+  const fetchPendingOrders = async () => {
+    try {
+      const response = await axios.get("http://localhost:9002/pendingOrders");
+      const { success } = response.data;
+      setPendingOrders(response.data.pendingOrders);
+      console.log(response.data.pendingOrders);
+      if (success) {
+        //setBalance(amount);
+      } else {
+        toast.warning(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.warning("something went wrong");
+    }
+  };
+
+  const fetchCompletedOrders = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:9004/completedOrders"
+      );
+      const { success } = response.data;
+      setCompletedOrders(response.data.completedOrders);
+      console.log(response.data.completedOrders);
+      if (success) {
+        //setBalance(amount);
+      } else {
+        toast.warning(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.warning("something went wrong2");
+    }
+  };
+
+  const acceptOrder = async (id) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:9004/completeOrder",
+        {
+          orderId: id, // Replace with the actual user bank ID
+        }
+      );
+      const { success } = response.data;
+      if (success) {
+        //setBalance(amount);
+      } else {
+        toast.warning(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.warning("something went wrong");
+    }
+    fetchAccountBalance(); // Call the function when the component mounts
+    fetchPendingOrders();
+    fetchCompletedOrders();
+  };
+
   return (
     <div>
       <header className="header">
@@ -144,8 +224,7 @@ const Supplier = ({
               <div>Total Price: ${order.totalPrice}</div>
             </div>
             <div>
-              <button className="status1">
-                {/* onClick={makeOrderRequest} */}
+              <button className="status1" onClick={(e)=>{acceptOrder(order._id)}}>
                 Accept
               </button>
             </div>
