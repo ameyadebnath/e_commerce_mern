@@ -85,7 +85,15 @@ function App() {
 
         <Route path="/bank" element={<Bank user={user} />} />
         <Route path="/supplier" element={<Supplier />} />
-        <Route path="/current_order" element={<Current_order />} />
+        <Route path="/current_order" element={<Current_order
+                                                  user={user}
+                                                  setUser={setUser}
+                                                  cartItems={cartItems}
+                                                  setCartItems={setCartItems}
+                                                  handleAddProduct={handleAddProduct}
+                                                  handleRemoveProduct={handleRemoveProduct}
+                                                  handleCartClearance={handleCartClearance}
+        />} />
         <Route
           path="/cart"
           element={
