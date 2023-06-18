@@ -8,6 +8,24 @@
 
   border-bottom: 2px solid black;
 }
+.header-links1 {
+  display: flex;
+  padding-left: 75%;
+}
+.header-links1 ul li {
+  list-style: none;
+  display: inline-block;
+  font-size: 20px;
+  padding-right: 15%;
+  padding-top: 10px;
+}
+
+.header-links1 ul li a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+  padding: 0px, 15px;
+}
 
 .status1:hover {
   background-color: lightgreen;
@@ -26,4 +44,13 @@
   margin-top: 10px;
   margin-left: 50%;
   margin-bottom: 5%;
+}
+.cart-items2 {
+  margin: 30px auto;
+  width: 400px;
+  padding: 25px 25px 25px 100px;
+  font-weight: 600;
+  background-color: #b2ac88;
+  border: 2px solid black;
+  border-radius: 5px;
 }

@@ -182,7 +182,8 @@ const Current_order = ({
 
           <div>
             <div className="my1">
-              <div>Date: {order.date}</div>
+              <div>Date of Order: {order.dateoforder}</div>
+              <div>Order Confirmation Date: {order.dateofaccpted}</div>
               <div>Transaction_ID: {order._id}</div>
             </div>
             {order.orderedItems.map((item) => (

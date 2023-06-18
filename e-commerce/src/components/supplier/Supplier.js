@@ -93,12 +93,9 @@ const Supplier = ({
   // Function to fetch the user's account balance
   const fetchAccountBalance = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:9003/getUserAmount",
-        {
-          bankId: user.bankid, // Replace with the actual user bank ID
-        }
-      );
+      const response = await axios.post("http://localhost:9003/getUserAmount", {
+        bankId: user.bankid, // Replace with the actual user bank ID
+      });
       const { amount, success } = response.data;
       if (success) {
         setBalance(amount);
@@ -130,9 +127,7 @@ const Supplier = ({
 
   const fetchCompletedOrders = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:9004/completedOrders"
-      );
+      const response = await axios.get("http://localhost:9004/completedOrders");
       const { success } = response.data;
       setCompletedOrders(response.data.completedOrders);
       console.log(response.data.completedOrders);
@@ -149,12 +144,9 @@ const Supplier = ({
 
   const acceptOrder = async (id) => {
     try {
-      const response = await axios.post(
-        "http://localhost:9004/completeOrder",
-        {
-          orderId: id, // Replace with the actual user bank ID
-        }
-      );
+      const response = await axios.post("http://localhost:9004/completeOrder", {
+        orderId: id, // Replace with the actual user bank ID
+      });
       const { success } = response.data;
       if (success) {
         //setBalance(amount);
@@ -180,7 +172,7 @@ const Supplier = ({
             </Link>
           </h1>
         </div>
-        <div className="header-links">
+        <div className="header-links1">
           <ul>
             <li>
               <Link to="/login">logout</Link>
@@ -193,6 +185,10 @@ const Supplier = ({
       <div className="account-balance">Current Balance: ${balance}</div>
 
       <h2 className="cart-items-header1">Pending Orders List</h2>
+      {PendingOrders.length === 0 && (
+        <div className="cart-items2">No Available Orders</div>
+      )}
+
       {PendingOrders.map((order) => (
         <div className="cart-items1">
           {/* {cartItems.length === 0 && (
@@ -224,7 +220,12 @@ const Supplier = ({
               <div>Total Price: ${order.totalPrice}</div>
             </div>
             <div>
-              <button className="status1" onClick={(e)=>{acceptOrder(order._id)}}>
+              <button
+                className="status1"
+                onClick={(e) => {
+                  acceptOrder(order._id);
+                }}
+              >
                 Accept
               </button>
             </div>
@@ -241,7 +242,8 @@ const Supplier = ({
 
           <div>
             <div className="my1">
-              <div>Date: {order.date}</div>
+              <div>Date of Order: {order.dateoforder}</div>
+              <div>Date of Accepted: {order.dateofaccpted}</div>
               <div>Transaction_ID: {order._id}</div>
             </div>
             {order.orderedItems.map((item) => (
