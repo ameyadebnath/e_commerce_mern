@@ -1,10 +1,98 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Supplier.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 
-const Supplier = () => {
+const Supplier = ({
+  user,
+  setUser,
+  cartItems,
+  setCartItems,
+  handleAddProduct,
+  handleRemoveProduct,
+  handleCartClearance,
+}) => {
   const navigate = useNavigate();
+
+  const [balance, setBalance] = useState("");
+  const [PendingOrders, setPendingOrders] = useState([{ orderedItems: [] }]);
+  const [completedOrders, setCompletedOrders] = useState([{ orderedItems: [] }]);
+
+  useEffect(() => {
+    // Function to fetch the user's account balance
+    const fetchAccountBalance = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:9003/getUserAmount"
+        );
+        const { amount, success } = response.data;
+        if (success) {
+          setBalance(amount);
+        } else {
+          toast.warning(response.data.message);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.warning("something went wrong");
+      }
+    };
+
+    const fetchPendingOrders = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:9002/getPendingOrders",
+          {
+            userId: user._id, // Replace with the actual user bank ID
+          }
+        );
+        const { success } = response.data;
+        setPendingOrders(response.data.pendingOrders);
+        console.log(response.data.pendingOrders);
+        if (success) {
+          //setBalance(amount);
+        } else {
+          toast.warning(response.data.message);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.warning("something went wrong");
+      }
+    };
+
+    const fetchCompletedOrders = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:9004/getCompletedOrders",
+          {
+            userId: user._id, // Replace with the actual user bank ID
+          }
+        );
+        const { success } = response.data;
+        setCompletedOrders(response.data.completedOrders);
+        console.log(response.data.completedOrders);
+        if (success) {
+          //setBalance(amount);
+        } else {
+          toast.warning(response.data.message);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.warning("something went wrong");
+      }
+    };
+
+    fetchAccountBalance(); // Call the function when the component mounts
+    fetchPendingOrders();
+    fetchCompletedOrders();
+
+    // Cleanup function
+    return () => {
+      // Any cleanup logic if needed
+    };
+  }, []);
+
   return (
     <div>
       <header className="header">
