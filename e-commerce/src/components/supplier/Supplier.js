@@ -27,7 +27,10 @@ const Supplier = ({
     const fetchAccountBalance = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:9003/getUserAmount"
+          "http://localhost:9003/getUserAmount",
+          {
+            bankId: user.bankid, // Replace with the actual user bank ID
+          }
         );
         const { amount, success } = response.data;
         if (success) {
@@ -62,7 +65,7 @@ const Supplier = ({
 
     const fetchCompletedOrders = async () => {
       try {
-        const response = await axios.post(
+        const response = await axios.get(
           "http://localhost:9004/completedOrders"
         );
         const { success } = response.data;
@@ -75,7 +78,7 @@ const Supplier = ({
         }
       } catch (error) {
         console.log(error);
-        toast.warning("something went wrong");
+        toast.warning("something went wrong2");
       }
     };
 
