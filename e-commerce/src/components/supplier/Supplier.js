@@ -18,7 +18,9 @@ const Supplier = ({
 
   const [balance, setBalance] = useState("");
   const [PendingOrders, setPendingOrders] = useState([{ orderedItems: [] }]);
-  const [completedOrders, setCompletedOrders] = useState([{ orderedItems: [] }]);
+  const [completedOrders, setCompletedOrders] = useState([
+    { orderedItems: [] },
+  ]);
 
   useEffect(() => {
     // Function to fetch the user's account balance
@@ -98,7 +100,7 @@ const Supplier = ({
       <header className="header">
         <div>
           <h1>
-            <Link to="/login" className="logo">
+            <Link to="/" className="logo">
               iGadget
             </Link>
           </h1>
@@ -113,21 +115,77 @@ const Supplier = ({
       </header>
 
       {/* balance */}
-      <div className="account-balance1">Supplier's Balance: </div>
+      <div className="account-balance">Current Balance: ${balance}</div>
 
-      <div className="pending-cart-items">
-        <h2 className="pending-cart-items-header">Pending Orders List</h2>
+      <h2 className="cart-items-header1">Pending Orders List</h2>
+      {PendingOrders.map((order) => (
+        <div className="cart-items1">
+          {/* {cartItems.length === 0 && (
+          <div className="cart-items-empty">No items are added.</div>
+        )} */}
 
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>will add here all products to show</div>
-          <button className="status1">Accept</button>
+          <div>
+            <div className="my1">
+              <div>Date: {order.date}</div>
+              <div>Transaction_ID: {order._id}</div>
+            </div>
+            {order.orderedItems.map((item) => (
+              <div>
+                <div key={item.id} className="cart-items-list1">
+                  <img
+                    className="cart-items-image"
+                    src={item.image}
+                    alt={item.title}
+                  />
+                  <div className="cart-items-name">{item.title}</div>
+
+                  <div className="cart-items-price">
+                    {item.quantity} * ${item.price}
+                  </div>
+                </div>
+              </div>
+            ))}
+            <div className="price">
+              <div>Total Price: ${order.totalPrice}</div>
+            </div>
+          </div>
         </div>
-      </div>
+      ))}
 
-      <div className="pending-cart-items">
-        <h2 className="pending-cart-items-header">Delivered Orders List</h2>
-        <div>will add delivered product list</div>
-      </div>
+      <h2 className="cart-items-header1">Shipped Orders List</h2>
+      {completedOrders.map((order) => (
+        <div className="cart-items1">
+          {/* {cartItems.length === 0 && (
+          <div className="cart-items-empty">No items are added.</div>
+        )} */}
+
+          <div>
+            <div className="my1">
+              <div>Date: {order.date}</div>
+              <div>Transaction_ID: {order._id}</div>
+            </div>
+            {order.orderedItems.map((item) => (
+              <div>
+                <div key={item.id} className="cart-items-list1">
+                  <img
+                    className="cart-items-image"
+                    src={item.image}
+                    alt={item.title}
+                  />
+                  <div className="cart-items-name">{item.title}</div>
+
+                  <div className="cart-items-price">
+                    {item.quantity} * ${item.price}
+                  </div>
+                </div>
+              </div>
+            ))}
+            <div className="price">
+              <div>Total Price: ${order.totalPrice}</div>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

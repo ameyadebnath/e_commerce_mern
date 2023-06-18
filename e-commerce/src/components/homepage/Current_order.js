@@ -16,7 +16,9 @@ const Current_order = ({
 }) => {
   const [balance, setBalance] = useState("");
   const [PendingOrders, setPendingOrders] = useState([{ orderedItems: [] }]);
-  const [completedOrders, setCompletedOrders] = useState([{ orderedItems: [] }]);
+  const [completedOrders, setCompletedOrders] = useState([
+    { orderedItems: [] },
+  ]);
 
   useEffect(() => {
     // Function to fetch the user's account balance
@@ -170,7 +172,41 @@ const Current_order = ({
           </div>
         </div>
       ))}
-      <div className="container d-flex justify-content-center align-items-center"></div>
+
+      <h2 className="cart-items-header1">Shipped Orders List</h2>
+      {completedOrders.map((order) => (
+        <div className="cart-items1">
+          {/* {cartItems.length === 0 && (
+          <div className="cart-items-empty">No items are added.</div>
+        )} */}
+
+          <div>
+            <div className="my1">
+              <div>Date: {order.date}</div>
+              <div>Transaction_ID: {order._id}</div>
+            </div>
+            {order.orderedItems.map((item) => (
+              <div>
+                <div key={item.id} className="cart-items-list1">
+                  <img
+                    className="cart-items-image"
+                    src={item.image}
+                    alt={item.title}
+                  />
+                  <div className="cart-items-name">{item.title}</div>
+
+                  <div className="cart-items-price">
+                    {item.quantity} * ${item.price}
+                  </div>
+                </div>
+              </div>
+            ))}
+            <div className="price">
+              <div>Total Price: ${order.totalPrice}</div>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
