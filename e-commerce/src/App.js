@@ -68,7 +68,10 @@ function App() {
           }
         />
 
-        <Route path="/login_supplier" element={<Login_supplier />} />
+        <Route path="/login_supplier" element={<Login_supplier
+              mUser={user}
+              setMUser={setUser}
+              handleCartClearance={handleCartClearance}/>} />
         <Route
           path="/login"
           element={
