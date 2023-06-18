@@ -16,7 +16,7 @@ const Current_order = ({
 }) => {
 
   const [balance, setBalance] = useState("");
-  const [PendingOrders, setPendingOrders] = useState([])
+  const [PendingOrders, setPendingOrders] = useState([{orderedItems: []}])
 
   useEffect(() => {
     // Function to fetch the user's account balance
@@ -113,6 +113,7 @@ const Current_order = ({
       {/* balance */}
       <div className="account-balance">Current Balance: ${balance}</div>
 
+      {PendingOrders.map( (order)=>( 
       <div className="cart-items">
         <h2 className="cart-items-header">Cart Items</h2>
 
@@ -122,7 +123,7 @@ const Current_order = ({
 
         <div>
           will add here all products to show
-          {PendingOrders[0].orderedItems.map((item) => (
+          {order.orderedItems.map((item) => (
             <div key={item.id} className="cart-items-list">
               <img
                 className="cart-items-image"
@@ -158,7 +159,7 @@ const Current_order = ({
           Total price
           {/* <div className="cart-items-total-price ">${totalPrice}</div> */}
         </div>
-      </div>
+      </div> ) )}
       <div className="container d-flex justify-content-center align-items-center"></div>
     </div>
   );
