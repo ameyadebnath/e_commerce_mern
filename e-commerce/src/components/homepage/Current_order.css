@@ -22,15 +22,16 @@
 }
 .cart-items1 {
   margin: 30px auto;
-  width: 40%;
-  background-color: #b2ac88;
+  width: 50%;
+  background-color: whitesmoke;
+
   border: 2px solid black;
   border-radius: 5px;
 }
 .status3 {
   border: none;
   border-radius: 5px;
-  background-color: whitesmoke;
+  background-color: lightblue;
   height: 30px;
   width: 150px;
   font-size: 18px;
@@ -75,7 +76,7 @@
 .my1 {
   margin-top: 2%;
   margin-left: 2%;
-  width: 80%;
+  width: 90%;
 
   /* background-color: ; */
 
@@ -96,7 +97,7 @@
   margin-left: 5%;
   margin-right: 5%;
   border: 2px solid black;
-  background-color: lightgrey;
+  background-color: cornsilk;
   border-radius: 10px;
   margin-bottom: 2%;
 }

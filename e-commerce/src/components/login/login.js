@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
-const Login = ({mUser,setMUser,handleCartClearance}) => {
+const Login = ({ mUser, setMUser, handleCartClearance }) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -24,18 +24,18 @@ const Login = ({mUser,setMUser,handleCartClearance}) => {
     axios.post("http://localhost:9002/login", user).then((res) => {
       console.log(res.data);
       handleCartClearance();
-      if(res.data.user===undefined) {
+      if (res.data.user === undefined) {
         toast.warning(res.data.message);
         return;
       }
       toast.success(res.data.message);
-      console.log(typeof setMUser)
+      console.log(typeof setMUser);
       setMUser(res.data.user);
-      if(res.data.user.bankid.length!==0){
-        navigate('/');
-      }else{
+      if (res.data.user.bankid.length !== 0) {
+        navigate("/");
+      } else {
         //navigate to bank info providing page
-        navigate('/bank');
+        navigate("/bank");
       }
     });
   };
@@ -86,11 +86,6 @@ const Login = ({mUser,setMUser,handleCartClearance}) => {
               <li className="nav-item">
                 <a className="nav-link" href="/login_supplier">
                   Supplier
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/admin">
-                  Admin
                 </a>
               </li>
             </ul>
