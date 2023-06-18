@@ -41,7 +41,7 @@ const Homepage = ({
           <ul>
             <li>
               <Link to="/cart" className="cart">
-                <i class="fas fa-shopping-cart" />
+              <i class="fas fa-shopping-cart" />{cartItems.length}
               </Link>
             </li>
           </ul>
