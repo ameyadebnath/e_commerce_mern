@@ -27,6 +27,21 @@
   border: 2px solid black;
   border-radius: 5px;
 }
+.status3 {
+  border: none;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  height: 30px;
+  width: 150px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 70%;
+  margin-bottom: 5%;
+}
+.status3:hover {
+  background-color: rgba(255, 0, 0, 0.775);
+}
 /* .cart-items1 {
   margin: 30px auto;
   width: 40%;

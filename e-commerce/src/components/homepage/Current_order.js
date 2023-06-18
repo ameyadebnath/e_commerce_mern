@@ -169,6 +169,14 @@ const Current_order = ({
             <div className="price">
               <div>Total Price: ${order.totalPrice}</div>
             </div>
+            <div>
+              <button className="status3">
+                {/* onClick={(e) => {
+                  acceptOrder(order._id);
+                }} */}
+                Cancel_Order
+              </button>
+            </div>
           </div>
         </div>
       ))}
