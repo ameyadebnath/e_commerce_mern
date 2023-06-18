@@ -49,3 +49,7 @@
   margin-right: 15px;
   margin-left: 15px;
 }
+
+.navbar-brand {
+  padding-left: 2%;
+}
