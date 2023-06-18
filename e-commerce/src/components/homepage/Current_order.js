@@ -136,51 +136,35 @@ const Current_order = ({
       {/* balance */}
       <div className="account-balance">Current Balance: ${balance}</div>
 
+      <h2 className="cart-items-header1">Pending Orders List</h2>
       {PendingOrders.map((order) => (
-        <div className="cart-items">
-          <h2 className="cart-items-header">Cart Items</h2>
-
+        <div className="cart-items1">
           {/* {cartItems.length === 0 && (
           <div className="cart-items-empty">No items are added.</div>
         )} */}
 
           <div>
-            will add here all products to show
+            <div className="my1">
+              <div>Date: {order.date}</div>
+              <div>Transaction_ID: {order._id}</div>
+            </div>
             {order.orderedItems.map((item) => (
-              <div key={item.id} className="cart-items-list">
+              <div key={item.id} className="cart-items-list1">
                 <img
                   className="cart-items-image"
                   src={item.image}
                   alt={item.title}
                 />
                 <div className="cart-items-name">{item.title}</div>
-                <div className="cart-items-funtion">
-                  <button
-                    className="cart-items-add"
-                    onClick={() => handleAddProduct(item)}
-                  >
-                    +
-                  </button>
-                  <button
-                    className="cart-items-remove"
-                    onClick={() => handleRemoveProduct(item)}
-                  >
-                    -
-                  </button>
-                </div>
+
                 <div className="cart-items-price">
                   {item.quantity} * ${item.price}
                 </div>
+                <div>
+                  <button className="status">status</button>
+                </div>
               </div>
             ))}
-            <div>
-              <button className="status">status</button>
-            </div>
-          </div>
-
-          <div className="cart-items-total-price-name">
-            Total price
-            {/* <div className="cart-items-total-price ">${totalPrice}</div> */}
           </div>
         </div>
       ))}
