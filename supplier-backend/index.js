@@ -88,6 +88,17 @@ app.get("/completedOrders", async (req, res) => {
   }
 });
 
+app.post('/getCompletedOrders', async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const completedOrders = await CompletedOrder.find({ userId: userId });
+    res.send({ completedOrders: completedOrders, success: 1 });
+  } catch (error) {
+    console.log(error);
+    res.send({ message: 'An error occurred', success: 0 });
+  }
+});
 
 app.listen(9004, () => {
   console.log("Bank server started at poet 9004");
