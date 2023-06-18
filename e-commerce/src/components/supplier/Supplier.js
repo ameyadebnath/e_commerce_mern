@@ -43,11 +43,8 @@ const Supplier = ({
 
     const fetchPendingOrders = async () => {
       try {
-        const response = await axios.post(
-          "http://localhost:9002/getPendingOrders",
-          {
-            userId: user._id, // Replace with the actual user bank ID
-          }
+        const response = await axios.get(
+          "http://localhost:9002/pendingOrders"
         );
         const { success } = response.data;
         setPendingOrders(response.data.pendingOrders);
@@ -66,10 +63,7 @@ const Supplier = ({
     const fetchCompletedOrders = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:9004/getCompletedOrders",
-          {
-            userId: user._id, // Replace with the actual user bank ID
-          }
+          "http://localhost:9004/completedOrders"
         );
         const { success } = response.data;
         setCompletedOrders(response.data.completedOrders);

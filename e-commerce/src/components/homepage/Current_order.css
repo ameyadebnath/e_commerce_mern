@@ -27,6 +27,17 @@
   border: 2px solid black;
   border-radius: 5px;
 }
+/* .cart-items1 {
+  margin: 30px auto;
+  width: 40%;
+  background-color: #b2ac88;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-image: url("/public/images/bg.jpg");
+  background-size: cover;
+  background-position: center;
+} */
+
 .account-balance1 {
   margin: 55px auto;
   width: 40%;
