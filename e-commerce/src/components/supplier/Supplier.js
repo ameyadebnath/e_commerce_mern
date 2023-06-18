@@ -46,9 +46,7 @@ const Supplier = ({
 
     const fetchPendingOrders = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:9002/pendingOrders"
-        );
+        const response = await axios.get("http://localhost:9002/pendingOrders");
         const { success } = response.data;
         setPendingOrders(response.data.pendingOrders);
         console.log(response.data.pendingOrders);
@@ -144,6 +142,12 @@ const Supplier = ({
             ))}
             <div className="price">
               <div>Total Price: ${order.totalPrice}</div>
+            </div>
+            <div>
+              <button className="status1">
+                {/* onClick={makeOrderRequest} */}
+                Accept
+              </button>
             </div>
           </div>
         </div>
