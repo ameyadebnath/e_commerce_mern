@@ -5,7 +5,7 @@ import Supplier from "../supplier/Supplier";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const Login_supplier = ({mUser,setMUser,handleCartClearance}) => {
+const Login_supplier = ({ mUser, setMUser, handleCartClearance }) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -23,24 +23,24 @@ const Login_supplier = ({mUser,setMUser,handleCartClearance}) => {
 
   const login = () => {
     if (user.email !== "supplier.e-commerce@gmail.com") {
-      toast.warning("credentials did not match!")
-      return
+      toast.warning("credentials did not match!");
+      return;
     }
     axios.post("http://localhost:9002/login", user).then((res) => {
       console.log(res.data);
       handleCartClearance();
-      if(res.data.user===undefined) {
+      if (res.data.user === undefined) {
         toast.warning(res.data.message);
         return;
       }
       toast.success(res.data.message);
-      console.log(typeof setMUser)
+      console.log(typeof setMUser);
       setMUser(res.data.user);
-      if(res.data.user.bankid.length!==0){
-        navigate('/supplier');
-      }else{
+      if (res.data.user.bankid.length !== 0) {
+        navigate("/supplier");
+      } else {
         //navigate to bank info providing page
-        navigate('/bank');
+        navigate("/bank");
       }
     });
   };
@@ -73,11 +73,6 @@ const Login_supplier = ({mUser,setMUser,handleCartClearance}) => {
               <li className="nav-item">
                 <a className="nav-link" href="/login_supplier">
                   Supplier
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/admin">
-                  Admin
                 </a>
               </li>
             </ul>

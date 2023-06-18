@@ -1,7 +1,7 @@
 .cart-items {
   margin: 30px auto;
   width: 50%;
-  background-color: rgba(255,165,0,0.5);
+  background-color: cornsilk;
   border: 2px solid black;
   border-radius: 5px;
 }
@@ -91,9 +91,10 @@
   font-size: 22px;
 }
 .submit {
-  background-color: orange;
+  background-color: lightblue;
   width: 20%;
-  margin-right: 45px;
+
+  margin-left: 11%;
   font-weight: 700;
   border: black;
   border-radius: 7px;
