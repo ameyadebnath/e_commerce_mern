@@ -149,22 +149,24 @@ const Current_order = ({
               <div>Transaction_ID: {order._id}</div>
             </div>
             {order.orderedItems.map((item) => (
-              <div key={item.id} className="cart-items-list1">
-                <img
-                  className="cart-items-image"
-                  src={item.image}
-                  alt={item.title}
-                />
-                <div className="cart-items-name">{item.title}</div>
+              <div>
+                <div key={item.id} className="cart-items-list1">
+                  <img
+                    className="cart-items-image"
+                    src={item.image}
+                    alt={item.title}
+                  />
+                  <div className="cart-items-name">{item.title}</div>
 
-                <div className="cart-items-price">
-                  {item.quantity} * ${item.price}
-                </div>
-                <div>
-                  <button className="status">status</button>
+                  <div className="cart-items-price">
+                    {item.quantity} * ${item.price}
+                  </div>
                 </div>
               </div>
             ))}
+            <div className="price">
+              <div>Total Price: ${order.totalPrice}</div>
+            </div>
           </div>
         </div>
       ))}
