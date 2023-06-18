@@ -122,7 +122,7 @@ const Current_order = ({
 
         <div>
           will add here all products to show
-          {/* {cartItems.map((item) => (
+          {PendingOrders[0].orderedItems.map((item) => (
             <div key={item.id} className="cart-items-list">
               <img
                 className="cart-items-image"
@@ -148,7 +148,7 @@ const Current_order = ({
                 {item.quantity} * ${item.price}
               </div>
             </div>
-          ))} */}
+          ))}
           <div>
             <button className="status">status</button>
           </div>
