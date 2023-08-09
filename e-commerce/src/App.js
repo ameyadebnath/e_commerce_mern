@@ -11,6 +11,9 @@ import Bank from "./components/login/bank";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Supplier from "./components/supplier/Supplier";
 import Current_order from "./components/homepage/Current_order";
+import Shipped_order from "./components/homepage/Shipped_order";
+import Delivered_order from "./components/homepage/Delivered_order";
+import Shipped_from_supplier from "./components/supplier/Shipped_from_supplier";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -68,10 +71,16 @@ function App() {
           }
         />
 
-        <Route path="/login_supplier" element={<Login_supplier
+        <Route
+          path="/login_supplier"
+          element={
+            <Login_supplier
               mUser={user}
               setMUser={setUser}
-              handleCartClearance={handleCartClearance}/>} />
+              handleCartClearance={handleCartClearance}
+            />
+          }
+        />
         <Route
           path="/login"
           element={
@@ -87,24 +96,41 @@ function App() {
         <Route path="/admin_page" element={<Admin_page />} />
 
         <Route path="/bank" element={<Bank user={user} />} />
-        <Route path="/supplier" element={<Supplier
-                                          user={user}
-                                          setUser={setUser}
-                                          cartItems={cartItems}
-                                          setCartItems={setCartItems}
-                                          handleAddProduct={handleAddProduct}
-                                          handleRemoveProduct={handleRemoveProduct}
-                                          handleCartClearance={handleCartClearance}
-        />} />
-        <Route path="/current_order" element={<Current_order
-                                                  user={user}
-                                                  setUser={setUser}
-                                                  cartItems={cartItems}
-                                                  setCartItems={setCartItems}
-                                                  handleAddProduct={handleAddProduct}
-                                                  handleRemoveProduct={handleRemoveProduct}
-                                                  handleCartClearance={handleCartClearance}
-        />} />
+
+        <Route path="/shipped_order" element={<Shipped_order />} />
+        <Route path="/delivered_order" element={<Delivered_order />} />
+        <Route
+          path="/shipped_from_supplier"
+          element={<Shipped_from_supplier />}
+        />
+        <Route
+          path="/supplier"
+          element={
+            <Supplier
+              user={user}
+              setUser={setUser}
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+              handleAddProduct={handleAddProduct}
+              handleRemoveProduct={handleRemoveProduct}
+              handleCartClearance={handleCartClearance}
+            />
+          }
+        />
+        <Route
+          path="/current_order"
+          element={
+            <Current_order
+              user={user}
+              setUser={setUser}
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+              handleAddProduct={handleAddProduct}
+              handleRemoveProduct={handleRemoveProduct}
+              handleCartClearance={handleCartClearance}
+            />
+          }
+        />
         <Route
           path="/cart"
           element={

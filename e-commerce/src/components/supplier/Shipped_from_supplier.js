@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./Supplier.css";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-import "./Cart.css";
-import "./Current_order.css";
-import "./Shipped_order";
-import "./Delivered_order";
 
-const Current_order = ({
+const Shipped_from_supplier = ({
   user,
   setUser,
   cartItems,
@@ -16,6 +14,8 @@ const Current_order = ({
   handleRemoveProduct,
   handleCartClearance,
 }) => {
+  const navigate = useNavigate();
+
   const [balance, setBalance] = useState("");
   const [PendingOrders, setPendingOrders] = useState([{ orderedItems: [] }]);
   const [completedOrders, setCompletedOrders] = useState([
@@ -46,12 +46,7 @@ const Current_order = ({
 
     const fetchPendingOrders = async () => {
       try {
-        const response = await axios.post(
-          "http://localhost:9002/getPendingOrders",
-          {
-            userId: user._id, // Replace with the actual user bank ID
-          }
-        );
+        const response = await axios.get("http://localhost:9002/pendingOrders");
         const { success } = response.data;
         setPendingOrders(response.data.pendingOrders);
         console.log(response.data.pendingOrders);
@@ -68,11 +63,8 @@ const Current_order = ({
 
     const fetchCompletedOrders = async () => {
       try {
-        const response = await axios.post(
-          "http://localhost:9004/getCompletedOrders",
-          {
-            userId: user._id, // Replace with the actual user bank ID
-          }
+        const response = await axios.get(
+          "http://localhost:9004/completedOrders"
         );
         const { success } = response.data;
         setCompletedOrders(response.data.completedOrders);
@@ -84,7 +76,7 @@ const Current_order = ({
         }
       } catch (error) {
         console.log(error);
-        toast.warning("something went wrong");
+        toast.warning("something went wrong2");
       }
     };
 
@@ -118,12 +110,7 @@ const Current_order = ({
 
   const fetchPendingOrders = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:9002/getPendingOrders",
-        {
-          userId: user._id, // Replace with the actual user bank ID
-        }
-      );
+      const response = await axios.get("http://localhost:9002/pendingOrders");
       const { success } = response.data;
       setPendingOrders(response.data.pendingOrders);
       console.log(response.data.pendingOrders);
@@ -140,12 +127,7 @@ const Current_order = ({
 
   const fetchCompletedOrders = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:9004/getCompletedOrders",
-        {
-          userId: user._id, // Replace with the actual user bank ID
-        }
-      );
+      const response = await axios.get("http://localhost:9004/completedOrders");
       const { success } = response.data;
       setCompletedOrders(response.data.completedOrders);
       console.log(response.data.completedOrders);
@@ -156,18 +138,16 @@ const Current_order = ({
       }
     } catch (error) {
       console.log(error);
-      toast.warning("something went wrong");
+      toast.warning("something went wrong2");
     }
   };
 
-  const cancelOrder = async (orderId) => {
+  const acceptOrder = async (id) => {
     try {
-      const response = await axios.post(
-        "http://localhost:9002/cancelPendingOrder",
-        { orderId: orderId }
-      );
+      const response = await axios.post("http://localhost:9004/completeOrder", {
+        orderId: id, // Replace with the actual user bank ID
+      });
       const { success } = response.data;
-      console.log(response.data);
       if (success) {
         //setBalance(amount);
       } else {
@@ -192,36 +172,16 @@ const Current_order = ({
             </Link>
           </h1>
         </div>
-        <div className="header-links">
+        <div className="header-links1">
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/supplier">Pending_orders</Link>
             </li>
           </ul>
 
           <ul>
             <li>
-              <Link to="/cart" className="cart">
-                <i class="fas fa-shopping-cart" />
-              </Link>
-            </li>
-          </ul>
-
-          <ul>
-            <li>
-              <Link to="/current_order">Current_order</Link>
-            </li>
-          </ul>
-
-          <ul>
-            <li>
-              <Link to="/shipped_order">Shipped_order</Link>
-            </li>
-          </ul>
-
-          <ul>
-            <li>
-              <Link to="/delivered_order">Delivered_order</Link>
+              <Link to="/shipped_from_supplier">Shipped_orders</Link>
             </li>
           </ul>
 
@@ -235,56 +195,44 @@ const Current_order = ({
 
       {/* balance */}
       <div className="account-balance">Current Balance: ${balance}</div>
-      <div className="container">
-        <div className="column">
-          <h2 className="cart-items-header1">Pending Orders List</h2>
-          {PendingOrders.map((order) => (
-            <div className="cart-items1">
-              {/* {cartItems.length === 0 && (
+
+      <h2 className="cart-items-header1">Shipped Orders List</h2>
+      {completedOrders.map((order) => (
+        <div className="cart-items1">
+          {/* {cartItems.length === 0 && (
           <div className="cart-items-empty">No items are added.</div>
         )} */}
 
+          <div>
+            <div className="my1">
+              <div>Date of Order: {order.dateoforder}</div>
+              <div>Date of Accepted: {order.dateofaccpted}</div>
+              <div>Transaction_ID: {order._id}</div>
+            </div>
+            {order.orderedItems.map((item) => (
               <div>
-                <div className="my1">
-                  <div>Date: {order.date}</div>
-                  <div>Transaction_ID: {order._id}</div>
-                </div>
-                {order.orderedItems.map((item) => (
-                  <div>
-                    <div key={item.id} className="cart-items-list1">
-                      <img
-                        className="cart-items-image"
-                        src={item.image}
-                        alt={item.title}
-                      />
-                      <div className="cart-items-name">{item.title}</div>
+                <div key={item.id} className="cart-items-list1">
+                  <img
+                    className="cart-items-image"
+                    src={item.image}
+                    alt={item.title}
+                  />
+                  <div className="cart-items-name">{item.title}</div>
 
-                      <div className="cart-items-price">
-                        {item.quantity} * ${item.price}
-                      </div>
-                    </div>
+                  <div className="cart-items-price">
+                    {item.quantity} * ${item.price}
                   </div>
-                ))}
-                <div className="price">
-                  <div>Total Price: ${order.totalPrice}</div>
-                </div>
-                <div>
-                  <button
-                    className="status3"
-                    onClick={(e) => {
-                      cancelOrder(order._id);
-                    }}
-                  >
-                    Cancel_Order
-                  </button>
                 </div>
               </div>
+            ))}
+            <div className="price">
+              <div>Total Price: ${order.totalPrice}</div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 };
 
-export default Current_order;
+export default Shipped_from_supplier;

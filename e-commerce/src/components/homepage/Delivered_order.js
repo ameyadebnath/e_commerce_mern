@@ -4,10 +4,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import "./Cart.css";
 import "./Current_order.css";
-import "./Shipped_order";
-import "./Delivered_order";
 
-const Current_order = ({
+const Delivered_order = ({
   user,
   setUser,
   cartItems,
@@ -237,8 +235,8 @@ const Current_order = ({
       <div className="account-balance">Current Balance: ${balance}</div>
       <div className="container">
         <div className="column">
-          <h2 className="cart-items-header1">Pending Orders List</h2>
-          {PendingOrders.map((order) => (
+          <h2 className="cart-items-header1">Delivered Orders</h2>
+          {completedOrders.map((order) => (
             <div className="cart-items1">
               {/* {cartItems.length === 0 && (
           <div className="cart-items-empty">No items are added.</div>
@@ -246,7 +244,8 @@ const Current_order = ({
 
               <div>
                 <div className="my1">
-                  <div>Date: {order.date}</div>
+                  <div>Date of Order: {order.dateoforder}</div>
+                  <div>Order Confirmation Date: {order.dateofaccpted}</div>
                   <div>Transaction_ID: {order._id}</div>
                 </div>
                 {order.orderedItems.map((item) => (
@@ -268,16 +267,6 @@ const Current_order = ({
                 <div className="price">
                   <div>Total Price: ${order.totalPrice}</div>
                 </div>
-                <div>
-                  <button
-                    className="status3"
-                    onClick={(e) => {
-                      cancelOrder(order._id);
-                    }}
-                  >
-                    Cancel_Order
-                  </button>
-                </div>
               </div>
             </div>
           ))}
@@ -287,4 +276,4 @@ const Current_order = ({
   );
 };
 
-export default Current_order;
+export default Delivered_order;

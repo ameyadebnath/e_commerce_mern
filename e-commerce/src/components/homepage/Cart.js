@@ -61,14 +61,14 @@ const Cart = ({
         if (response.data.success === 1) toast.success(response.data.message);
         else toast.warning(response.data.message);
         // Process the response data
-        
-        navigate('/current_order')
+
+        navigate("/current_order");
       })
       .catch((error) => {
         console.log(error);
         // Handle any errors
       });
-      handleCartClearance();
+    handleCartClearance();
   };
 
   return (
@@ -99,6 +99,18 @@ const Cart = ({
           <ul>
             <li>
               <Link to="/current_order">Current_order</Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <Link to="/shipped_order">Shipped_order</Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <Link to="/delivered_order">Delivered_order</Link>
             </li>
           </ul>
 

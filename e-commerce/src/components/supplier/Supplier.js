@@ -175,6 +175,18 @@ const Supplier = ({
         <div className="header-links1">
           <ul>
             <li>
+              <Link to="/supplier">Pending_orders</Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <Link to="/shipped_from_supplier">Shipped_orders</Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
               <Link to="/login">logout</Link>
             </li>
           </ul>
@@ -228,42 +240,17 @@ const Supplier = ({
               >
                 Accept
               </button>
-            </div>
-          </div>
-        </div>
-      ))}
 
-      <h2 className="cart-items-header1">Shipped Orders List</h2>
-      {completedOrders.map((order) => (
-        <div className="cart-items1">
-          {/* {cartItems.length === 0 && (
-          <div className="cart-items-empty">No items are added.</div>
-        )} */}
+              {/*need to change funtion here @Shrestha30 */}
 
-          <div>
-            <div className="my1">
-              <div>Date of Order: {order.dateoforder}</div>
-              <div>Date of Accepted: {order.dateofaccpted}</div>
-              <div>Transaction_ID: {order._id}</div>
-            </div>
-            {order.orderedItems.map((item) => (
-              <div>
-                <div key={item.id} className="cart-items-list1">
-                  <img
-                    className="cart-items-image"
-                    src={item.image}
-                    alt={item.title}
-                  />
-                  <div className="cart-items-name">{item.title}</div>
-
-                  <div className="cart-items-price">
-                    {item.quantity} * ${item.price}
-                  </div>
-                </div>
-              </div>
-            ))}
-            <div className="price">
-              <div>Total Price: ${order.totalPrice}</div>
+              <button
+                className="status2"
+                onClick={(e) => {
+                  acceptOrder(order._id);
+                }}
+              >
+                Decline
+              </button>
             </div>
           </div>
         </div>

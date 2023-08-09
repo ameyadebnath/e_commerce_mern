@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { BrowserRouter as Router } from "react-router-dom";
 import Cart from "./Cart";
+import Shipped_order from "./Shipped_order";
+import Delivered_order from "./Delivered_order";
 
 const Homepage = ({
   user,
@@ -51,6 +53,18 @@ const Homepage = ({
           <ul>
             <li>
               <Link to="/current_order">Current_order</Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <Link to="/shipped_order">Shipped_order</Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <Link to="/delivered_order">Delivered_order</Link>
             </li>
           </ul>
 
