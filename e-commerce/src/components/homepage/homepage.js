@@ -26,7 +26,7 @@ const Homepage = ({
   return (
     <div>
       <header className="header">
-        <div>
+        <div className="headerdiv">
           <h1>
             <Link to="/" className="logo">
               iGadget
@@ -45,26 +45,26 @@ const Homepage = ({
               <Link to="/cart" className="cart">
                 <i class="fas fa-shopping-cart" />
 
-                {/* {cartItems.length} */}
+                {cartItems.length}
               </Link>
             </li>
           </ul>
 
           <ul>
-            <li>
-              <Link to="/current_order">Current_order</Link>
+            <li className="items">
+              <Link to="/current_order">Current Orders</Link>
             </li>
           </ul>
 
           <ul>
-            <li>
-              <Link to="/shipped_order">Shipped_order</Link>
+            <li className="items">
+              <Link to="/shipped_order">Orders on Delivery</Link>
             </li>
           </ul>
 
           <ul>
-            <li>
-              <Link to="/delivered_order">Delivered_order</Link>
+            <li className="items">
+              <Link to="/delivered_order">Delivered Orders</Link>
             </li>
           </ul>
 
