@@ -144,12 +144,33 @@ const Supplier = ({
 
   const acceptOrder = async (id) => {
     try {
-      const response = await axios.post("http://localhost:9004/completeOrder", {
+      const response = await axios.post("http://localhost:9004/moveToOnDelivery", {
         orderId: id, // Replace with the actual user bank ID
       });
       const { success } = response.data;
       if (success) {
         //setBalance(amount);
+      } else {
+        toast.warning(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.warning("something went wrong");
+    }
+    fetchAccountBalance(); // Call the function when the component mounts
+    fetchPendingOrders();
+    fetchCompletedOrders();
+  };
+
+  const cancelOrder = async (id) => {
+    try {
+      const response = await axios.post("http://localhost:9002/cancelPendingOrder", {
+        orderId: id, // Replace with the actual user bank ID
+      });
+      const { success } = response.data;
+      if (success) {
+        //setBalance(amount);
+        toast.info("Order Cancelled");
       } else {
         toast.warning(response.data.message);
       }
@@ -246,7 +267,7 @@ const Supplier = ({
               <button
                 className="status2"
                 onClick={(e) => {
-                  acceptOrder(order._id);
+                  cancelOrder(order._id);
                 }}
               >
                 Decline

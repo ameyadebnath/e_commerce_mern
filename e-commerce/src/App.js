@@ -97,7 +97,15 @@ function App() {
 
         <Route path="/bank" element={<Bank user={user} />} />
 
-        <Route path="/shipped_order" element={<Shipped_order />} />
+        <Route path="/shipped_order" element={<Shipped_order 
+        user={user}
+        setUser={setUser}
+        cartItems={cartItems}
+        setCartItems={setCartItems}
+        handleAddProduct={handleAddProduct}
+        handleRemoveProduct={handleRemoveProduct}
+        handleCartClearance={handleCartClearance}
+        />} />
         <Route path="/delivered_order" element={<Delivered_order />} />
         <Route
           path="/shipped_from_supplier"

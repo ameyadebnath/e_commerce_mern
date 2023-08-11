@@ -77,22 +77,35 @@ app.post("/completeOrder", async (req, res) => {
 
   try {
     // Use API to delete the pending order with the given order ID
-    const deletePendingOrderResponse = await axios.post("http://localhost:9002/deletePendingOrder/", {orderId: orderId});
-    const deletePendingOrderData = deletePendingOrderResponse.data;
-
-    if (deletePendingOrderData.success !== 1) {
-      return res.send({ message: "Failed to delete pending order", success: 0 });
+    var deletedDeliveryOrder = await OnDeliveryOrder.findById(orderId);
+    if (!deletedDeliveryOrder) {
+      return res.send({ message: "Order not found", success: 0 });
     }
 
-    const deletedOrder = deletePendingOrderData.deletedOrder;
+    // Retrieve the supplier's bank ID
+    const supplierBankIdResponse = await axios.get("http://localhost:9002/bankid");
+    const ecomBankId = supplierBankIdResponse.data.bankId;
+
+    const transferData = {
+      fromBankId: ecomBankId, // E-commerce bank ID
+      toBankId: bankid, // Supplier bank ID
+      amount: deletedDeliveryOrder.totalPrice,
+    };
+
+    const transferResponse = await axios.post("http://localhost:9003/transfer", transferData);
+    if (transferResponse.data.success !== 1) {
+      return res.send({ message: transferResponse.data.message, success: 0 });
+    }
+
+    //const deletedOrder = deletePendingOrderData.deletedOrder;
 
     // Create a new entry in the CompletedOrder schema using the deleted order data
     const newCompletedOrder = new CompletedOrder({
-      totalPrice: deletedOrder.totalPrice,
-      userId: deletedOrder.userId,
-      bankId: deletedOrder.bankId,
-      dateoforder: deletedOrder.date,
-      orderedItems: deletedOrder.orderedItems,
+      totalPrice: deletedDeliveryOrder.totalPrice,
+      userId: deletedDeliveryOrder.userId,
+      bankId: deletedDeliveryOrder.bankId,
+      dateoforder: deletedDeliveryOrder.dateoforder,
+      orderedItems: deletedDeliveryOrder.orderedItems,
     });
 
     await newCompletedOrder.save();
@@ -123,6 +136,51 @@ app.post('/getCompletedOrders', async (req, res) => {
   } catch (error) {
     console.log(error);
     res.send({ message: 'An error occurred', success: 0 });
+  }
+});
+
+app.post('/getOnDeliveryOrders', async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const onDeliveryOrders = await OnDeliveryOrder.find({ userId: userId });
+    res.send({ onDeliveryOrders: onDeliveryOrders, success: 1 });
+  } catch (error) {
+    console.log(error);
+    res.send({ message: 'An error occurred', success: 0 });
+  }
+});
+
+app.post("/moveToOnDelivery", async (req, res) => {
+  const { orderId } = req.body;
+
+  try {
+    // Use API to delete the pending order with the given order ID
+    const deletePendingOrderResponse = await axios.post("http://localhost:9002/deletePendingOrderNoTransfer", { orderId: orderId });
+    const deletePendingOrderData = deletePendingOrderResponse.data;
+
+    if (deletePendingOrderData.success !== 1) {
+      return res.send({ message: "Failed to delete pending order", success: 0 });
+    }
+
+    const deletedOrder = deletePendingOrderData.deletedOrder;
+
+    // Create a new entry in the OnDeliveryOrder schema using the deleted pending order data
+    const newOnDeliveryOrder = new OnDeliveryOrder({
+      totalPrice: deletedOrder.totalPrice,
+      userId: deletedOrder.userId,
+      bankId: deletedOrder.bankId,
+      dateoforder: deletedOrder.date,
+      orderedItems: deletedOrder.orderedItems,
+      dateofaccpted: new Date().toLocaleDateString(), // Set the accepted date for on-delivery orders
+    });
+
+    await newOnDeliveryOrder.save();
+
+    return res.send({ message: "Order moved to on-delivery successfully", success: 1 });
+  } catch (error) {
+    console.log(error);
+    return res.send({ message: "An error occurred", success: 0 });
   }
 });
 

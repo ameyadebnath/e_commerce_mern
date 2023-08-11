@@ -282,6 +282,23 @@ app.post("/cancelPendingOrder", async (req, res) => {
   }
 });
 
+app.post("/deletePendingOrderNoTransfer", async (req, res) => {
+  const { orderId } = req.body;
+
+  try {
+    // Delete the pending order
+    deletedOrder = await PendingOrder.findByIdAndDelete(orderId);
+    if (!deletedOrder) {
+      return res.send({ message: "Order not found", success: 0 });
+    }
+
+    return res.send({ message: "Order deleted successfully", success: 1, deletedOrder: deletedOrder });
+  } catch (error) {
+    console.log(error);
+    return res.send({ message: "An error occurred", success: 0 });
+  }
+});
+
 app.listen(9002, () => {
   console.log("BE started at poet 9002");
 });

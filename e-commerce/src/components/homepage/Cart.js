@@ -183,7 +183,7 @@ const Cart = ({
         <div className="container d-flex justify-content-center align-items-center">
           <button className="submit" onClick={makeOrderRequest}>
             {" "}
-            Auto-Pay{" "}
+            Temporary Pay to IGadget{" "}
           </button>
         </div>
       </div>
