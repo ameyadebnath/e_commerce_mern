@@ -40,6 +40,32 @@ const completedOrderSchema = new mongoose.Schema({
 
 const CompletedOrder = mongoose.model('CompletedOrder', completedOrderSchema);
 
+// Define the schema for OnDeliveryOrders
+const onDeliveryOrderSchema = new mongoose.Schema({
+  totalPrice: Number,
+  userId: String,
+  bankId: String,
+  dateoforder: String,
+  dateofaccpted: {
+    type: String,
+    default: new Date().toLocaleDateString()
+  },
+  orderedItems: [
+    {
+      id: Number,
+      image: String,
+      title: String,
+      price: String,
+      quantity: Number
+    }
+  ]
+});
+
+// Create the OnDeliveryOrder model
+const OnDeliveryOrder = mongoose.model('OnDeliveryOrder', onDeliveryOrderSchema);
+
+// Import necessary modules and set up the server
+
 var bankid = ""
 
 app.get("/bankid", (req, res) => {

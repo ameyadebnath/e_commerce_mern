@@ -44,8 +44,9 @@ const Homepage = ({
             <li>
               <Link to="/cart" className="cart">
                 <i class="fas fa-shopping-cart" />
+                {cartItems.reduce((total, item) => total + item.quantity, 0)};
 
-                {cartItems.length}
+                {/* {cartItems.length} */}
               </Link>
             </li>
           </ul>
