@@ -287,7 +287,8 @@ app.post("/deletePendingOrderNoTransfer", async (req, res) => {
 
   try {
     // Delete the pending order
-    deletedOrder = await PendingOrder.findByIdAndDelete(orderId);
+    console.log(orderId)
+    var deletedOrder = await PendingOrder.findByIdAndDelete(orderId);
     if (!deletedOrder) {
       return res.send({ message: "Order not found", success: 0 });
     }

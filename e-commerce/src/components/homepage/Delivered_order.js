@@ -17,7 +17,7 @@ const Delivered_order = ({
   const [balance, setBalance] = useState("");
   const [PendingOrders, setPendingOrders] = useState([{ orderedItems: [] }]);
   const [completedOrders, setCompletedOrders] = useState([
-    { orderedItems: [] },
+    { orderedItems: [] }
   ]);
 
   useEffect(() => {
@@ -45,16 +45,16 @@ const Delivered_order = ({
     const fetchPendingOrders = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:9002/getPendingOrders",
+          "http://localhost:9004/getOnDeliveryOrdersByUserId",
           {
             userId: user._id, // Replace with the actual user bank ID
           }
         );
         const { success } = response.data;
-        setPendingOrders(response.data.pendingOrders);
         console.log(response.data.pendingOrders);
         if (success) {
           //setBalance(amount);
+          setPendingOrders(response.data.pendingOrders);
         } else {
           toast.warning(response.data.message);
         }
@@ -67,16 +67,16 @@ const Delivered_order = ({
     const fetchCompletedOrders = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:9004/getCompletedOrders",
+          "http://localhost:9004/getOnDeliveryOrdersByUserId",
           {
             userId: user._id, // Replace with the actual user bank ID
           }
         );
         const { success } = response.data;
-        setCompletedOrders(response.data.completedOrders);
         console.log(response.data.completedOrders);
-        if (success) {
+        if (success && response.completedOrders!==undefined) {
           //setBalance(amount);
+          setCompletedOrders(response.data.completedOrders);
         } else {
           toast.warning(response.data.message);
         }
@@ -117,16 +117,17 @@ const Delivered_order = ({
   const fetchPendingOrders = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:9002/getPendingOrders",
+        "http://localhost:9002/getOnDeliveryOrdersByUserId",
         {
           userId: user._id, // Replace with the actual user bank ID
         }
       );
       const { success } = response.data;
-      setPendingOrders(response.data.pendingOrders);
       console.log(response.data.pendingOrders);
-      if (success) {
+      if (success && !(!response.data.pendingOrders)) {
         //setBalance(amount);
+        
+        setPendingOrders(response.data.pendingOrders);
       } else {
         toast.warning(response.data.message);
       }
@@ -139,16 +140,16 @@ const Delivered_order = ({
   const fetchCompletedOrders = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:9004/getCompletedOrders",
+        "http://localhost:9004/getOnDeliveryOrdersByUserId",
         {
           userId: user._id, // Replace with the actual user bank ID
         }
       );
       const { success } = response.data;
-      setCompletedOrders(response.data.completedOrders);
       console.log(response.data.completedOrders);
-      if (success) {
+      if (success && response.completedOrders!==undefined) {
         //setBalance(amount);
+        setCompletedOrders(response.data.completedOrders);
       } else {
         toast.warning(response.data.message);
       }

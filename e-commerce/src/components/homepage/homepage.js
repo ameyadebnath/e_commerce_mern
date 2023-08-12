@@ -59,13 +59,13 @@ const Homepage = ({
 
           <ul>
             <li className="items">
-              <Link to="/shipped_order">Orders on Delivery</Link>
+              <Link to="/shipped_order">Shipped Orders</Link>
             </li>
           </ul>
 
           <ul>
             <li className="items">
-              <Link to="/delivered_order">Delivered Orders</Link>
+              <Link to="/delivered_order">Orders on Delivery</Link>
             </li>
           </ul>
 

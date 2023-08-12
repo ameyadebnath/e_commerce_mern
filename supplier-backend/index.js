@@ -160,7 +160,7 @@ app.post("/moveToOnDelivery", async (req, res) => {
     const deletePendingOrderData = deletePendingOrderResponse.data;
 
     if (deletePendingOrderData.success !== 1) {
-      return res.send({ message: "Failed to delete pending order", success: 0 });
+      return res.send({ message: deletePendingOrderData.message, success: 0 });
     }
 
     const deletedOrder = deletePendingOrderData.deletedOrder;
@@ -181,6 +181,28 @@ app.post("/moveToOnDelivery", async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.send({ message: "An error occurred", success: 0 });
+  }
+});
+
+app.post('/getAllOnDeliveryOrders', async (req, res) => {
+  try {
+    const onDeliveryOrders = await OnDeliveryOrder.find();
+    res.send({ onDeliveryOrders: onDeliveryOrders, success: 1 });
+  } catch (error) {
+    console.log(error);
+    res.send({ message: 'An error occurred', success: 0 });
+  }
+});
+
+app.post('/getOnDeliveryOrdersByUserId', async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const onDeliveryOrders = await OnDeliveryOrder.find({ userId: userId });
+    res.send({ onDeliveryOrders: onDeliveryOrders, success: 1 });
+  } catch (error) {
+    console.log(error);
+    res.send({ message: 'An error occurred', success: 0 });
   }
 });
 
