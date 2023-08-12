@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Products.css";
+import "./homepage.css";
 
 const Products = ({
   user,

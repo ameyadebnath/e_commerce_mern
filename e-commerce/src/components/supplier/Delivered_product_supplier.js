@@ -4,8 +4,9 @@ import "./Supplier.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import "./Delivered_product_supplier.css";
 
-const Supplier = ({
+const Delivered_product_supplier = ({
   user,
   setUser,
   cartItems,
@@ -144,39 +145,12 @@ const Supplier = ({
 
   const acceptOrder = async (id) => {
     try {
-      const response = await axios.post(
-        "http://localhost:9004/moveToOnDelivery",
-        {
-          orderId: id, // Replace with the actual user bank ID
-        }
-      );
+      const response = await axios.post("http://localhost:9004/completeOrder", {
+        orderId: id, // Replace with the actual user bank ID
+      });
       const { success } = response.data;
       if (success) {
         //setBalance(amount);
-      } else {
-        toast.warning(response.data.message);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.warning("something went wrong");
-    }
-    fetchAccountBalance(); // Call the function when the component mounts
-    fetchPendingOrders();
-    fetchCompletedOrders();
-  };
-
-  const cancelOrder = async (id) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:9002/cancelPendingOrder",
-        {
-          orderId: id, // Replace with the actual user bank ID
-        }
-      );
-      const { success } = response.data;
-      if (success) {
-        //setBalance(amount);
-        toast.info("Order Cancelled");
       } else {
         toast.warning(response.data.message);
       }
@@ -227,14 +201,12 @@ const Supplier = ({
       </header>
 
       {/* balance */}
-      <div className="account-balance">Current Balance: ${balance}</div>
+      {/* <div className="account-balance">Current Balance: ${balance}</div> */}
 
-      <h2 className="cart-items-header1">Pending Orders List</h2>
-      {PendingOrders.length === 0 && (
-        <div className="cart-items2">No Available Orders</div>
-      )}
-
-      {PendingOrders.map((order) => (
+      <div className="a">
+        <h2 className="cart-items-header1">All Delivered Product List</h2>
+      </div>
+      {completedOrders.map((order) => (
         <div className="cart-items1">
           {/* {cartItems.length === 0 && (
           <div className="cart-items-empty">No items are added.</div>
@@ -242,7 +214,8 @@ const Supplier = ({
 
           <div>
             <div className="my1">
-              <div>Date: {order.date}</div>
+              <div>Date of Order: {order.dateoforder}</div>
+              <div>Date of Accepted: {order.dateofaccpted}</div>
               <div>Transaction_ID: {order._id}</div>
             </div>
             {order.orderedItems.map((item) => (
@@ -264,27 +237,6 @@ const Supplier = ({
             <div className="price">
               <div>Total Price: ${order.totalPrice}</div>
             </div>
-            <div>
-              <button
-                className="status1"
-                onClick={(e) => {
-                  acceptOrder(order._id);
-                }}
-              >
-                Accept
-              </button>
-
-              {/*need to change funtion here @Shrestha30 */}
-
-              <button
-                className="status2"
-                onClick={(e) => {
-                  cancelOrder(order._id);
-                }}
-              >
-                Decline
-              </button>
-            </div>
           </div>
         </div>
       ))}
@@ -292,4 +244,4 @@ const Supplier = ({
   );
 };
 
-export default Supplier;
+export default Delivered_product_supplier;

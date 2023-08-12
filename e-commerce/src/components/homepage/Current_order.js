@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import "./Cart.css";
+import "./homepage.css";
 import "./Current_order.css";
 import "./Shipped_order";
 import "./Delivered_order";

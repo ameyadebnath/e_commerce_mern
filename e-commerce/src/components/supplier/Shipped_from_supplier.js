@@ -187,6 +187,12 @@ const Shipped_from_supplier = ({
 
           <ul>
             <li>
+              <Link to="/Delivered_product_supplier">Delivered_orders</Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
               <Link to="/login">logout</Link>
             </li>
           </ul>

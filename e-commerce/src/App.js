@@ -14,6 +14,7 @@ import Current_order from "./components/homepage/Current_order";
 import Shipped_order from "./components/homepage/Shipped_order";
 import Delivered_order from "./components/homepage/Delivered_order";
 import Shipped_from_supplier from "./components/supplier/Shipped_from_supplier";
+import Delivered_product_supplier from "./components/supplier/Delivered_product_supplier";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -97,23 +98,39 @@ function App() {
 
         <Route path="/bank" element={<Bank user={user} />} />
 
-        <Route path="/shipped_order" element={<Shipped_order 
-        user={user}
-        setUser={setUser}
-        cartItems={cartItems}
-        setCartItems={setCartItems}
-        handleAddProduct={handleAddProduct}
-        handleRemoveProduct={handleRemoveProduct}
-        handleCartClearance={handleCartClearance}
-        />} />
-        <Route path="/delivered_order" element={<Delivered_order 
-        user={user}
-        setUser={setUser}
-        cartItems={cartItems}
-        setCartItems={setCartItems}
-        handleAddProduct={handleAddProduct}
-        handleRemoveProduct={handleRemoveProduct}
-        handleCartClearance={handleCartClearance}/>} />
+        <Route
+          path="/Delivered_product_supplier"
+          element={<Delivered_product_supplier />}
+        />
+
+        <Route
+          path="/shipped_order"
+          element={
+            <Shipped_order
+              user={user}
+              setUser={setUser}
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+              handleAddProduct={handleAddProduct}
+              handleRemoveProduct={handleRemoveProduct}
+              handleCartClearance={handleCartClearance}
+            />
+          }
+        />
+        <Route
+          path="/delivered_order"
+          element={
+            <Delivered_order
+              user={user}
+              setUser={setUser}
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+              handleAddProduct={handleAddProduct}
+              handleRemoveProduct={handleRemoveProduct}
+              handleCartClearance={handleCartClearance}
+            />
+          }
+        />
         <Route
           path="/shipped_from_supplier"
           element={<Shipped_from_supplier />}

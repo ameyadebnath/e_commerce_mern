@@ -1,0 +1,11 @@
+.cart-items-header5 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+.a {
+  margin-top: 50px;
+}
