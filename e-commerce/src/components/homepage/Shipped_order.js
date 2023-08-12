@@ -275,7 +275,7 @@ const Shipped_order = ({
                       acceptOrder(order._id);
                     }}
                   >
-                    Receive Order
+                    Receive Order & confirm auto-pay
                   </button>
                 </div>
               </div>
