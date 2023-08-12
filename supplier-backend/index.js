@@ -77,7 +77,7 @@ app.post("/completeOrder", async (req, res) => {
 
   try {
     // Use API to delete the pending order with the given order ID
-    var deletedDeliveryOrder = await OnDeliveryOrder.findById(orderId);
+    var deletedDeliveryOrder = await OnDeliveryOrder.findByIdAndDelete(orderId);
     if (!deletedDeliveryOrder) {
       return res.send({ message: "Order not found", success: 0 });
     }
@@ -196,6 +196,7 @@ app.post('/getAllOnDeliveryOrders', async (req, res) => {
 
 app.post('/getOnDeliveryOrdersByUserId', async (req, res) => {
   const { userId } = req.body;
+  console.log("userId for ALL order on delivery: "+userId)
 
   try {
     const onDeliveryOrders = await OnDeliveryOrder.find({ userId: userId });

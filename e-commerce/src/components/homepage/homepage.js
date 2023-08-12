@@ -43,29 +43,35 @@ const Homepage = ({
           <ul>
             <li>
               <Link to="/cart" className="cart">
-                <i class="fas fa-shopping-cart" />
-                {cartItems.reduce((total, item) => total + item.quantity, 0)};
-
+                <i class="fas fa-shopping-cart"/>
                 {/* {cartItems.length} */}
               </Link>
             </li>
           </ul>
 
           <ul>
-            <li className="items">
-              <Link to="/current_order">Current Orders</Link>
+            <li>
+              <Link to="/cart" className="cart">
+              {cartItems.reduce((total, item) => total + item.quantity, 0)}
+              </Link>
             </li>
           </ul>
 
           <ul>
             <li className="items">
-              <Link to="/shipped_order">Shipped Orders</Link>
+              <Link to="/current_order">Current_Orders</Link>
             </li>
           </ul>
 
           <ul>
             <li className="items">
-              <Link to="/delivered_order">Orders on Delivery</Link>
+              <Link to="/shipped_order">Shipped_Orders</Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li className="items">
+              <Link to="/delivered_order">Delivered_orders</Link>
             </li>
           </ul>
 

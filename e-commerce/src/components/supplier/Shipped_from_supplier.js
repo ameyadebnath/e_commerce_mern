@@ -63,12 +63,12 @@ const Shipped_from_supplier = ({
 
     const fetchCompletedOrders = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:9004/completedOrders"
+        const response = await axios.post(
+          "http://localhost:9004/getAllOnDeliveryOrders"
         );
         const { success } = response.data;
-        setCompletedOrders(response.data.completedOrders);
-        console.log(response.data.completedOrders);
+        setCompletedOrders(response.data.onDeliveryOrders);
+        console.log(response.data.onDeliveryOrders);
         if (success) {
           //setBalance(amount);
         } else {
@@ -127,10 +127,12 @@ const Shipped_from_supplier = ({
 
   const fetchCompletedOrders = async () => {
     try {
-      const response = await axios.get("http://localhost:9004/completedOrders");
+      const response = await axios.post(
+        "http://localhost:9004/getAllOnDeliveryOrders"
+      );
       const { success } = response.data;
-      setCompletedOrders(response.data.completedOrders);
-      console.log(response.data.completedOrders);
+      setCompletedOrders(response.data.onDeliveryOrders);
+      console.log(response.data.onDeliveryOrders);
       if (success) {
         //setBalance(amount);
       } else {

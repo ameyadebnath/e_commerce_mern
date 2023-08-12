@@ -46,14 +46,14 @@ const Shipped_order = ({
     const fetchPendingOrders = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:9002/getPendingOrders",
+          "http://localhost:9004/getOnDeliveryOrdersByUserId",
           {
             userId: user._id, // Replace with the actual user bank ID
           }
         );
         const { success } = response.data;
-        setPendingOrders(response.data.pendingOrders);
-        console.log(response.data.pendingOrders);
+        setPendingOrders(response.data.onDeliveryOrders);
+        console.log(response.data.onDeliveryOrders);
         if (success) {
           //setBalance(amount);
         } else {
@@ -68,14 +68,14 @@ const Shipped_order = ({
     const fetchCompletedOrders = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:9004/getCompletedOrders",
+          "http://localhost:9004/getOnDeliveryOrdersByUserId",
           {
             userId: user._id, // Replace with the actual user bank ID
           }
         );
         const { success } = response.data;
-        setCompletedOrders(response.data.completedOrders);
-        console.log(response.data.completedOrders);
+        setCompletedOrders(response.data.onDeliveryOrders);
+        console.log(response.data.onDeliveryOrders);
         if (success) {
           //setBalance(amount);
         } else {
@@ -118,14 +118,14 @@ const Shipped_order = ({
   const fetchPendingOrders = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:9002/getPendingOrders",
+        "http://localhost:9004/getOnDeliveryOrdersByUserId",
         {
           userId: user._id, // Replace with the actual user bank ID
         }
       );
       const { success } = response.data;
-      setPendingOrders(response.data.pendingOrders);
-      console.log(response.data.pendingOrders);
+      setCompletedOrders(response.data.onDeliveryOrders);
+      console.log(response.data.onDeliveryOrders);
       if (success) {
         //setBalance(amount);
       } else {
@@ -140,14 +140,14 @@ const Shipped_order = ({
   const fetchCompletedOrders = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:9004/getCompletedOrders",
+        "http://localhost:9004/getOnDeliveryOrdersByUserId",
         {
           userId: user._id, // Replace with the actual user bank ID
         }
       );
       const { success } = response.data;
-      setCompletedOrders(response.data.completedOrders);
-      console.log(response.data.completedOrders);
+      setCompletedOrders(response.data.onDeliveryOrders);
+      console.log(response.data.onDeliveryOrders);
       if (success) {
         //setBalance(amount);
       } else {
@@ -159,10 +159,10 @@ const Shipped_order = ({
     }
   };
 
-  const cancelOrder = async (orderId) => {
+  const acceptOrder = async (orderId) => {
     try {
       const response = await axios.post(
-        "http://localhost:9002/cancelPendingOrder",
+        "http://localhost:9004/completeOrder",
         { orderId: orderId }
       );
       const { success } = response.data;
@@ -246,7 +246,7 @@ const Shipped_order = ({
               <div>
                 <div className="my1">
                   <div>Date of Order: {order.dateoforder}</div>
-                  <div>Order Confirmation Date: {order.dateofaccpted}</div>
+                  <div>Order Packaging Date: {order.dateofaccpted}</div>
                   <div>Transaction_ID: {order._id}</div>
                 </div>
                 {order.orderedItems.map((item) => (
@@ -272,19 +272,10 @@ const Shipped_order = ({
                   <button
                     className="status4"
                     onClick={(e) => {
-                      cancelOrder(order._id);
+                      acceptOrder(order._id);
                     }}
                   >
-                    Received_order
-                  </button>
-
-                  <button
-                    className="status3"
-                    onClick={(e) => {
-                      cancelOrder(order._id);
-                    }}
-                  >
-                    Refused_order
+                    Receive Order
                   </button>
                 </div>
               </div>

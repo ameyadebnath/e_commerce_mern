@@ -67,14 +67,14 @@ const Delivered_order = ({
     const fetchCompletedOrders = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:9004/getOnDeliveryOrdersByUserId",
+          "http://localhost:9004/getCompletedOrders",
           {
             userId: user._id, // Replace with the actual user bank ID
           }
         );
         const { success } = response.data;
         console.log(response.data.completedOrders);
-        if (success && response.completedOrders!==undefined) {
+        if (success) {
           //setBalance(amount);
           setCompletedOrders(response.data.completedOrders);
         } else {
@@ -117,17 +117,16 @@ const Delivered_order = ({
   const fetchPendingOrders = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:9002/getOnDeliveryOrdersByUserId",
+        "http://localhost:9004/getCompletedOrders",
         {
           userId: user._id, // Replace with the actual user bank ID
         }
       );
       const { success } = response.data;
-      console.log(response.data.pendingOrders);
-      if (success && !(!response.data.pendingOrders)) {
+      setPendingOrders(response.data.completedOrders);
+      console.log(response.data.completedOrders);
+      if (success ) {
         //setBalance(amount);
-        
-        setPendingOrders(response.data.pendingOrders);
       } else {
         toast.warning(response.data.message);
       }
@@ -140,16 +139,16 @@ const Delivered_order = ({
   const fetchCompletedOrders = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:9004/getOnDeliveryOrdersByUserId",
+        "http://localhost:9004/getCompletedOrders",
         {
           userId: user._id, // Replace with the actual user bank ID
         }
       );
       const { success } = response.data;
+      setCompletedOrders(response.data.completedOrders);
       console.log(response.data.completedOrders);
-      if (success && response.completedOrders!==undefined) {
+      if (success) {
         //setBalance(amount);
-        setCompletedOrders(response.data.completedOrders);
       } else {
         toast.warning(response.data.message);
       }
@@ -237,7 +236,7 @@ const Delivered_order = ({
       <div className="container">
         <div className="column">
           <h2 className="cart-items-header1">Delivered Orders</h2>
-          {completedOrders.map((order) => (
+          {completedOrders.reverse().map((order) => (
             <div className="cart-items1">
               {/* {cartItems.length === 0 && (
           <div className="cart-items-empty">No items are added.</div>
@@ -246,7 +245,7 @@ const Delivered_order = ({
               <div>
                 <div className="my1">
                   <div>Date of Order: {order.dateoforder}</div>
-                  <div>Order Confirmation Date: {order.dateofaccpted}</div>
+                  <div>Date of delivery: {order.dateofaccpted}</div>
                   <div>Transaction_ID: {order._id}</div>
                 </div>
                 {order.orderedItems.map((item) => (

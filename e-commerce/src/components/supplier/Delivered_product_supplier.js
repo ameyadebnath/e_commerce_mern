@@ -215,7 +215,7 @@ const Delivered_product_supplier = ({
           <div>
             <div className="my1">
               <div>Date of Order: {order.dateoforder}</div>
-              <div>Date of Accepted: {order.dateofaccpted}</div>
+              <div>Date of Delivery: {order.dateofaccpted}</div>
               <div>Transaction_ID: {order._id}</div>
             </div>
             {order.orderedItems.map((item) => (

@@ -100,7 +100,13 @@ function App() {
 
         <Route
           path="/Delivered_product_supplier"
-          element={<Delivered_product_supplier />}
+          element={<Delivered_product_supplier user={user}
+          setUser={setUser}
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+          handleAddProduct={handleAddProduct}
+          handleRemoveProduct={handleRemoveProduct}
+          handleCartClearance={handleCartClearance}/>}
         />
 
         <Route
@@ -133,7 +139,15 @@ function App() {
         />
         <Route
           path="/shipped_from_supplier"
-          element={<Shipped_from_supplier />}
+          element={<Shipped_from_supplier
+            user={user}
+            setUser={setUser}
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+            handleAddProduct={handleAddProduct}
+            handleRemoveProduct={handleRemoveProduct}
+            handleCartClearance={handleCartClearance}
+          />}
         />
         <Route
           path="/supplier"
