@@ -203,6 +203,8 @@ const Delivered_product_supplier = ({
       {/* balance */}
       {/* <div className="account-balance">Current Balance: ${balance}</div> */}
 
+      <div className="account-balance">Current Balance: ${balance}</div>
+
       <div className="a">
         <h2 className="cart-items-header1">All Delivered Product List</h2>
       </div>
